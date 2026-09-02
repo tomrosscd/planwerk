@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>PlanWerk: resource capacity planning is about to have its moment</title>
+<meta name="description" content="PlanWerk is the resource capacity planning platform teams have been waiting for. Early access opening soon. Join the list." />
+<meta property="og:title" content="PlanWerk: coming soon" />
+<meta property="og:description" content="Resource capacity planning is about to have its moment. Get early access." />
+<meta property="og:type" content="website" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet" />
+
+<style>
+  :root{
+    --bg:#0A0A0B;
+    --ink:#F5F5F4;
+    --muted:#9A9A94;
+    --faint:#54554F;
+    --mint:#84FEC3;      /* brand green, from source SVG */
+    --teal:#5EEAD4;
+    --line:rgba(255,255,255,.08);
+    --line-2:rgba(255,255,255,.14);
+    --maxw:1180px;
+  }
+
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--bg);color:var(--ink);
+    font-family:"Space Grotesk",system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+    -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+    overflow-x:hidden;
+  }
+  a{color:inherit;text-decoration:none;}
+  ::selection{background:var(--mint);color:#08130D;}
+  .mono{font-family:"JetBrains Mono",ui-monospace,monospace;}
+
+  /* ---------- Background: something rising on the horizon ---------- */
+  .bg-layers{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none;}
+  .grid-layer{
+    position:absolute;inset:-2px;
+    background-image:radial-gradient(rgba(255,255,255,.055) 1px, transparent 1px);
+    background-size:34px 34px;background-position:center;
+    -webkit-mask-image:radial-gradient(120% 90% at 50% 44%, #000 30%, transparent 78%);
+    mask-image:radial-gradient(120% 90% at 50% 44%, #000 30%, transparent 78%);
+  }
+  .lines-layer{
+    position:absolute;inset:0;
+    background-image:
+      linear-gradient(to right, rgba(255,255,255,.03) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255,255,255,.03) 1px, transparent 1px);
+    background-size:170px 170px;
+    -webkit-mask-image:radial-gradient(100% 80% at 50% 42%, #000 20%, transparent 72%);
+    mask-image:radial-gradient(100% 80% at 50% 42%, #000 20%, transparent 72%);
+  }
+  /* faint horizon band */
+  .horizon{
+    position:absolute;left:0;right:0;top:46%;height:1px;
+    background:linear-gradient(90deg,transparent,rgba(132,254,195,.28),transparent);
+    box-shadow:0 0 60px 6px rgba(132,254,195,.06);
+  }
+  .glow{
+    position:absolute;left:50%;top:40%;width:min(900px,124vw);aspect-ratio:1/1;
+    transform:translate(-50%,-50%);border-radius:50%;
+    background:radial-gradient(circle at 50% 50%,
+      rgba(132,254,195,.17) 0%, rgba(94,234,212,.10) 30%,
+      rgba(94,234,212,.03) 46%, transparent 60%);
+    filter:blur(14px);animation:breathe 7.5s ease-in-out infinite;
+  }
+  .ring{
+    position:absolute;left:50%;top:40%;width:min(640px,88vw);aspect-ratio:1/1;
+    transform:translate(-50%,-50%);border-radius:50%;
+    background:conic-gradient(from 210deg,
+      transparent 0deg, rgba(132,254,195,0) 40deg, rgba(132,254,195,.55) 140deg,
+      rgba(94,234,212,.35) 210deg, rgba(132,254,195,0) 300deg, transparent 360deg);
+    -webkit-mask:radial-gradient(closest-side, transparent 78%, #000 79%, #000 82%, transparent 83%);
+    mask:radial-gradient(closest-side, transparent 78%, #000 79%, #000 82%, transparent 83%);
+    filter:blur(1px);opacity:.9;animation:spin 26s linear infinite;
+  }
+  @keyframes breathe{0%,100%{opacity:.75;transform:translate(-50%,-50%) scale(1);}50%{opacity:1;transform:translate(-50%,-50%) scale(1.06);}}
+  @keyframes spin{to{transform:translate(-50%,-50%) rotate(360deg);}}
+
+  /* ---------- Shell ---------- */
+  .wrap{position:relative;z-index:1;}
+  .container{max-width:var(--maxw);margin:0 auto;padding:0 clamp(20px,5vw,44px);}
+
+  /* ---------- Nav ---------- */
+  header.nav{position:relative;z-index:3;}
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;gap:16px;height:70px;}
+  .brand img{height:26px;width:auto;display:block;}
+  .icon-btn{
+    height:38px;width:38px;border-radius:999px;border:1px solid var(--line-2);
+    background:rgba(255,255,255,.02);display:grid;place-items:center;cursor:pointer;
+    transition:border-color .25s ease, transform .25s ease, background .25s ease;
+  }
+  .icon-btn img{height:20px;width:auto;display:block;animation:spin-icon 24s linear infinite;}
+  .icon-btn:hover{border-color:var(--mint);background:rgba(132,254,195,.06);transform:translateY(-1px);}
+  @keyframes spin-icon{to{transform:rotate(360deg);}}
+
+  /* ---------- Hero ---------- */
+  main.hero{
+    position:relative;z-index:1;min-height:calc(100dvh - 70px);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    text-align:center;padding:24px 0 60px;
+  }
+  .status{
+    display:inline-flex;align-items:center;gap:9px;
+    font-family:"JetBrains Mono",monospace;font-size:12px;letter-spacing:.2em;text-transform:uppercase;
+    color:var(--muted);padding:7px 15px;border:1px solid var(--line-2);border-radius:999px;
+    background:rgba(255,255,255,.02);margin-bottom:30px;
+  }
+  .status .dot{width:7px;height:7px;border-radius:50%;background:var(--mint);box-shadow:0 0 12px var(--mint);animation:pulse 2.4s ease-in-out infinite;}
+  @keyframes pulse{0%,100%{opacity:1;}50%{opacity:.3;}}
+
+  h1.headline{
+    font-weight:600;font-size:clamp(36px,6.4vw,72px);line-height:1.02;letter-spacing:-.02em;
+    max-width:15ch;margin:0 0 22px;
+  }
+  h1.headline .accent{color:var(--mint);}
+  p.sub{color:var(--muted);font-size:clamp(15px,1.7vw,18px);line-height:1.55;max-width:54ch;margin:0 0 34px;}
+
+  form.capture{
+    display:flex;gap:10px;width:min(520px,92vw);margin-left:auto;margin-right:auto;
+    background:rgba(255,255,255,.03);border:1px solid var(--line-2);border-radius:999px;
+    padding:7px 7px 7px 8px;transition:border-color .25s ease, box-shadow .25s ease;
+  }
+  form.capture:focus-within{border-color:var(--mint);box-shadow:0 0 0 4px rgba(132,254,195,.14), 0 0 40px rgba(132,254,195,.12);}
+  form.capture label{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;}
+  form.capture input{
+    flex:1;min-width:0;background:transparent;border:0;outline:0;color:var(--ink);
+    font-family:"JetBrains Mono",monospace;font-size:14px;padding:0 6px 0 14px;
+  }
+  form.capture input::placeholder{color:#6E6F69;}
+  form.capture button{
+    flex:none;background:var(--mint);color:#08130D;
+    font-family:"Space Grotesk",sans-serif;font-weight:600;font-size:14.5px;
+    border:0;border-radius:999px;padding:12px 22px;cursor:pointer;white-space:nowrap;
+    transition:transform .18s ease, box-shadow .25s ease;box-shadow:0 8px 26px rgba(132,254,195,.22);
+  }
+  form.capture button:hover{transform:translateY(-1px);box-shadow:0 12px 34px rgba(132,254,195,.34);}
+  form.capture button:active{transform:translateY(0) scale(.98);}
+  @media (max-width:460px){
+    form.capture{flex-direction:column;border-radius:20px;padding:10px;}
+    form.capture input{padding:8px 10px;}
+    form.capture button{width:100%;padding:13px;}
+  }
+  .helper{margin-top:14px;font-size:12.5px;color:var(--faint);}
+
+  /* Allocation meter (capacity motif + early-access scarcity) */
+  .alloc{width:min(520px,92vw);margin:26px auto 0;text-align:left;}
+  .alloc-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px;
+    font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;}
+  .alloc-top .l{color:var(--faint);}
+  .alloc-top .r{color:var(--mint);}
+  .alloc-bar{height:7px;border-radius:999px;background:rgba(255,255,255,.06);overflow:hidden;position:relative;}
+  .alloc-bar > span{position:absolute;inset:0 auto 0 0;width:0;border-radius:999px;
+    background:linear-gradient(90deg,var(--mint),var(--teal));transition:width 1.6s cubic-bezier(.2,.7,.2,1);}
+  .alloc-bar > span::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.35),transparent);animation:shimmer 2.8s linear infinite;}
+  @keyframes shimmer{0%{transform:translateX(-100%);}100%{transform:translateX(100%);}}
+
+  /* Success */
+  .success{display:none;width:min(520px,92vw);margin-left:auto;margin-right:auto;align-items:center;gap:14px;padding:16px 20px;border-radius:16px;
+    border:1px solid rgba(132,254,195,.4);background:rgba(132,254,195,.07);text-align:left;}
+  .success.show{display:flex;animation:rise .5s ease both;}
+  .success .tick{flex:none;width:30px;height:30px;border-radius:50%;background:var(--mint);color:#08130D;display:grid;place-items:center;font-weight:700;}
+  .success p{margin:0;font-size:14.5px;line-height:1.5;}
+
+  /* ---------- Buzzword ticker ---------- */
+  .ticker{position:relative;z-index:1;border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+    background:rgba(255,255,255,.015);overflow:hidden;padding:13px 0;
+    -webkit-mask:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);
+    mask:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);}
+  .ticker-track{display:inline-flex;white-space:nowrap;animation:marquee 34s linear infinite;}
+  .ticker-track span{font-family:"JetBrains Mono",monospace;font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--muted);padding:0 26px;display:inline-flex;align-items:center;gap:26px;}
+  .ticker-track span::after{content:"◆";color:var(--mint);opacity:.55;font-size:8px;}
+  @keyframes marquee{to{transform:translateX(-50%);}}
+
+  /* ---------- Investor section ---------- */
+  .invest{position:relative;z-index:1;padding:clamp(72px,11vw,128px) 0;border-bottom:1px solid var(--line);}
+  .invest-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(32px,5vw,64px);align-items:center;}
+  .invest h2{font-weight:600;font-size:clamp(30px,4.6vw,52px);line-height:1.04;letter-spacing:-.02em;margin:0 0 20px;max-width:16ch;}
+  .invest h2 .accent{color:var(--mint);}
+  .invest p.lead{color:var(--muted);font-size:clamp(15px,1.6vw,17px);line-height:1.6;max-width:52ch;margin:0 0 24px;}
+  .invest .fineprint{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.06em;color:var(--faint);margin:20px 0 0;}
+
+  .backer-card{border:1px solid var(--line-2);border-radius:20px;background:linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,.01));
+    padding:clamp(22px,3vw,30px);box-shadow:0 30px 70px rgba(0,0,0,.4);}
+  .backer-card .cap{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--faint);margin-bottom:20px;}
+  .metric{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:15px 0;border-top:1px solid var(--line);}
+  .metric:first-of-type{border-top:0;padding-top:0;}
+  .metric .val{font-weight:600;font-size:clamp(26px,3.4vw,34px);line-height:1;letter-spacing:-.01em;}
+  .metric .val.mint{color:var(--mint);}
+  .metric .lab{color:var(--muted);font-size:13px;text-align:right;max-width:20ch;}
+  .backer-card .cta{width:100%;margin-top:24px;background:var(--mint);color:#08130D;border:0;border-radius:999px;
+    font-family:"Space Grotesk",sans-serif;font-weight:600;font-size:15px;padding:15px;cursor:pointer;
+    transition:transform .18s ease, box-shadow .25s ease;box-shadow:0 10px 30px rgba(132,254,195,.22);}
+  .backer-card .cta:hover{transform:translateY(-1px);box-shadow:0 14px 40px rgba(132,254,195,.34);}
+  .backer-card .cta:active{transform:translateY(0) scale(.98);}
+  .backer-ack{display:none;margin-top:22px;padding:14px 16px;border-radius:12px;border:1px solid rgba(132,254,195,.4);
+    background:rgba(132,254,195,.07);font-size:14px;line-height:1.5;}
+  .backer-ack.show{display:block;animation:rise .5s ease both;}
+  @media (max-width:820px){.invest-grid{grid-template-columns:1fr;}}
+
+  /* ---------- Footer ---------- */
+  footer.foot{position:relative;z-index:1;padding:34px 0 40px;}
+  .foot-inner{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;}
+  .foot-inner img{height:20px;width:auto;opacity:.85;}
+  .foot-inner .cr{font-family:"JetBrains Mono",monospace;font-size:11.5px;letter-spacing:.06em;color:var(--faint);}
+
+  /* Entrance */
+  .rise{opacity:0;transform:translateY(16px);animation:rise .7s cubic-bezier(.2,.7,.2,1) forwards;}
+  .d1{animation-delay:.05s;}.d2{animation-delay:.16s;}.d3{animation-delay:.28s;}
+  .d4{animation-delay:.4s;}.d5{animation-delay:.52s;}.d6{animation-delay:.62s;}
+  @keyframes rise{to{opacity:1;transform:translateY(0);}}
+
+  @media (prefers-reduced-motion:reduce){
+    *{animation:none !important;transition:none !important;}
+    .rise{opacity:1;transform:none;}
+    .ring{opacity:.5;}
+    .alloc-bar > span{width:92% !important;}
+  }
+</style>
+</head>
+<body>
+
+<div class="bg-layers" aria-hidden="true">
+  <div class="lines-layer"></div>
+  <div class="grid-layer"></div>
+  <div class="horizon"></div>
+  <div class="glow"></div>
+  <div class="ring"></div>
+</div>
+
+<div class="wrap">
+  <header class="nav">
+    <div class="container nav-inner">
+      <a class="brand" href="#top" aria-label="PlanWerk"><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz48c3ZnIGlkPSJMYXllcl8yIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1OTUuNDQgMTE1LjI0Ij48ZGVmcz48c3R5bGU+LmNscy0xe2ZpbGw6Izg0ZmVjMzt9LmNscy0ye2ZpbGw6I2ZmZjt9PC9zdHlsZT48L2RlZnM+PGcgaWQ9IkxheWVyXzEtMiI+PHBhdGggY2xhc3M9ImNscy0yIiBkPSJNNTg5LjA3LDQ2LjNsLTQuOTksNS4yNS03LjM2LDcuNjktNC43OCw0Ljk2LDMuNTcsNS4zOSwxMC4wMSwxNC4yMiw0LjYsNi42Myw1LjMxLDcuODctMTYuNDEuMDktMS40NS0xLjY1LTE1LjE4LTIyLjM1LTYuMDcsNS45My0uNDUsMy41NXYxMi4wNWMuNTguNjYuMzUsMi40Mi0uNjIsMi40MmgtMTMuMDRzMC03Ny4yNywwLTc3LjI3YzAtLjQ1LS4zLTEuMjYtLjA0LTEuNDhzLjkyLS4zMywxLjMxLS4zMmwzLjIyLjExLDkuMTUuMS4wNywyMS41M3YzczAsMTEuMTcsMCwxMS4xN2wtLjA3LDYuMThjLjA0LjI0Ljc5LjUzLjk0LjM1bC42Ny0uNzUsMy40MS0zLjY4LDMuNTYtMy44NSw1LjkxLTYuMTgsMy40Mi0zLjY5LDIuODUtMi44MmgxNi41Yy4xMy4wNC42OS4zMS42MS40M2wtLjQzLjY1LTQuMjIsNC40NFoiLz48cGF0aCBjbGFzcz0iY2xzLTIiIGQ9Ik01MTUuOTEsOTcuNDFjMCwuNTEtMSwuOTktMS40Ny45OWwtMTIuNzMtLjE0di01Ny40czEzLjU3LS4wNSwxMy41Ny0uMDVjLjYxLjQyLjUyLDEuNjcuNTEsMi4zN2wtLjA5LDQuMDJjLS4wMi4xOC41MS41Ny42Mi40M2wuNTItLjZjMS4wNS0xLjIxLDEuODUtMi40NiwzLjEtMy40LDIuMzUtMS43Nyw0LjgyLTIuOCw3LjY5LTMuMzMsMi41NS0uNDcsNS4xNC0uNzEsNy41Mi40NWwuMDcsMTEuODFjMCwuNTIuMTQsMS43My0uNTUsMS42NmwtNC44My0uNWMtMi4xNy0uMjItNC4wMS4zMy02LjA5LDEuMDktNC40MywxLjYzLTcuNDMsNS44MS03LjY4LDEwLjY0bC0uMzEsNS44OS4wMiw5LjUxLjE1LDE2LjU1WiIvPjxwYXRoIGNsYXNzPSJjbHMtMiIgZD0iTTQzNyw0MS4yOWwtNi4xLDIwLjA4LTYuMjYsMTguNTItNC41OSwxNC4wMi0xLjU5LDQuNDhoLTEzLjc5cy0xLjc5LTUuMzItMS43OS01LjMybC0xMC4zLTMxLjQ0LTQuMzgsMTIuOTQtNi4yNywxOS40LTEuNjQsNC40MmgtMTMuMjFjLS42MywwLTEuMTQtMS4zLTEuMzItMS44OGwtNy40LTIyLjc1LTkuOTYtMjkuODljLS4yNS0uNzUtLjgzLTEuNzEtLjgyLTIuNSwwLS4zOCwxLjItLjU4LDEuNTMtLjNoMTEuMTVjLjUyLS4xNywxLjMzLS4yNSwxLjc4LS4wOS4zOS4xNC41OC45Mi43NSwxLjUxbDguMTQsMjcuMjYsMi41NSw5Yy4xOS4wOC43MS4yMy43Ni4wNmwuMjEtLjgxLDIuMTYtNy4zNCwzLjE1LTkuODQsNS43Ni0xOC43M2MuMTMtLjQyLjc3LTEuMSwxLjA5LTEuMjhoMTIuMTZjLjg0LjM4LDEsMS4wNywxLjI5LDEuOTlsMTAuODUsMzUuMTkuMzguOTFjLjA4LjE5LjYtLjU4LjY3LS43M2wxMC43OS0zNy4zMiwxMi43My0uMDZjLjM0LDAsMS4wMi4yNiwxLjUxLjUyWiIvPjxwYXRoIGNsYXNzPSJjbHMtMiIgZD0iTTE4NC4zMSw2OS4zMmMtMi42Ny43NC01LjI5Ljc0LTguMDIuNzVsLTIuMDMuMjMtMTQuMjIuMDV2MjYuODdjMCwuMjQtLjIuODktLjQxLjk3LS4yNi4xMS0uNzIuMDktMS4yLjA1bC0xLjkyLjE0LTEwLjk3LS4wMlYxOS41MnM4LjE5LS4xNSw4LjE5LS4xNWwxMS4zNi0uMDQsNy45OC0uMDIsNC4zNS4wMmM3Ljc1LjA0LDE2LjYsMy45MiwyMS4yMSwxMC4zNywzLjM2LDQuNyw0LjQ4LDEwLjQsNC4zOSwxNi4wOGwtLjUxLDQuMjRjLS42OSw1LjcxLTMuNzcsMTAuNC04LjA1LDE0LjIyLTIuODUsMi41NC02LjI2LDQtMTAuMTQsNS4wOFpNMTc1Ljg4LDU3LjMzbDQuNzEtMS4wMmM0LjItMS40MSw2Ljk3LTQuNzUsNy42Mi05LjAxLDEuMjQtOC4xNS0zLjExLTEzLjI4LTExLjA4LTE0Ljc1bC0xNi4xMi0uMDMtMS4xMi41N2MtLjI1LjEzLjEzLjk4LjEyLDEuMjdsLS4wNiw1Ljc4djQuODJzLjA2LDEwLjI1LjA2LDEwLjI1YzAsLjMzLS4zMSwxLjI0LS4wMiwxLjRsMS4yOS43MmgxNC42WiIvPjxwYXRoIGNsYXNzPSJjbHMtMiIgZD0iTTQ4Ny4wNiw4MS42OGw1LjM3Ljg4Yy0xLjUyLDQuOTItNC44NCw4Ljk4LTkuMTMsMTEuOTQtNS4xOCwzLjU3LTExLjMyLDUuMDQtMTcuNjYsNC43OWwtNS4xMy0uNTFjLTEwLjMzLTEuODgtMTcuMzItOC42NC0yMC40OS0xOC41NGwtLjg0LTMuMzNjLS42Mi0yLjQ2LTEuMDQtNC45My0uNzktNy40NmwuNTYtNS42N2MyLjMtMTQuODcsMTMuNTctMjQuMTksMjguNzctMjMuOTIsNy41OS4xNCwxNC40NSwzLjI3LDE5LjQ1LDkuMDQsMy44OSw0LjQ5LDUuODcsMTAuMjksNi40NCwxNi4yNGwuMDgsOS4wNWgtNDAuMzljLjMxLDguNzMsOC41MiwxNC43MywxNi42MywxMi44OSwzLjg5LS44OCw3LjM2LTIuOTIsOS4wOS02LjY4bDMuNjUuNDgsNC40MS44MVpNNDc4LjA1LDYzLjIzYy4zMi0uMDYsMS4wMi0uMywxLjA3LS41Ny4yLTEuMS0xLjY1LTUuNzEtMy44OS03LjU3LTQuMDgtMy40LTkuOTItNC4xMS0xNC44MS0xLjcxLTMuNjgsMS44LTYuMDQsNS40OS02Ljk3LDkuMzhsMy4wNi40N2gyMS41NFoiLz48cGF0aCBjbGFzcz0iY2xzLTIiIGQ9Ik0yMzQuODQsOTEuMDNjLTUuMS03LjYyLTIuOTMtMTkuNjYsNi44My0yNC4yNSw0LjkyLTIuMzIsMTAuMjItMi43NSwxNS41Ni0zLjFsNC40NS0uMjksNi44OC0uNmMuMDctMS4yNi4yNi0zLDAtNC4yMy0uNzctMy42NS0zLjk0LTUuOS03LjUtNi4zOC00LjcxLS42My0xMC4wNy4wOC0xMi4zMiw0LjE2bC0xLjM1LDMuMzItMi44LS4xMmMtMy41NS0uMTYtNi44MS0uNDgtMTAuMzItMS4ybC40Mi0yLjFjMS4xOS01Ljk4LDQuOTMtMTEuMTcsMTAuNTktMTMuNjVsNS43Ny0xLjk4YzMuNTYtMS4yMiwxMS41NS0uOTQsMTUuODQuMTUsMy4wMS43Nyw1Ljk2LDIuMDcsOC40MywzLjk5LDQuNDQsMy40Niw3LjM3LDkuNjUsNy4zOSwxNS4wOGwuMTQsMzguNDgtMTIuMTQuMDljLS4yNSwwLTEtLjExLTEuMDMtLjM1bC0uMTUtMS4xMS0uMjQtMy4yYy4xMS0uNjcuMzktMS4yNC0uNDUtMS43My0yLjc4LDMuNS02LjI3LDUuNjgtMTAuNjEsNi42NS04LjU0LDEuOTItMTguMzMtLjExLTIzLjM3LTcuNjNaTTI1MC4zOCw4Ni45YzYuMjQsMi40NywxNC41LS4wMSwxNy40NS02LjAzLDEuMTktMi40MywxLjE5LTQuODIuOTktNy41NWwtMy43Ni4xNC01LjM1LjU2LTMuODIuMzdjLTMuMjkuMzItNy40NSwxLjY5LTguODcsNC40Ny0xLjYsMy4xMy4wOCw2Ljc0LDMuMzYsOC4wNFoiLz48cGF0aCBjbGFzcz0iY2xzLTIiIGQ9Ik0zMTAuNjksNTUuNzljLTIuMjQsMS45OS0zLjc5LDUuMDktMy44LDguMDlsLS4xMSwzMy44NWMtLjQ3LjM1LTEuMjMuNjgtMS43NS42OGwtMTIuNDMtLjF2LTU2LjNjMC0uMzYuMjgtMS4wOS41NS0xLjExbDEuMTYtLjA1LDExLjMyLS4wOWMuNDksMCwxLjE0LjcxLDEuMTQsMS4xMmwuMDYsNS4zM2MuOTYtLjU2LDEuMDQtLjk1LDEuNjItMS41NSwyLjk4LTMuMTIsNy4yLTUuMywxMS42MS01LjY5bDcuMTIuMDRjMS40NiwwLDMuMjguNjQsNC41OSwxLjIxLDUuNTksMi40Myw5LjksNi44LDExLjU4LDEyLjYzLjM0LDEuMTcuOTIsMi42My45MywzLjc5bC4yMSwyMC44My4wMiwxMi40MS0uMjIsNy41MS0xMy41MS0uMDUtLjE3LTM0LjMzYy0uMDItMy41NS0xLjQtNy4wOC00LjIxLTkuMTMtNC42Ni0zLjQtMTEuMjgtMy4wMS0xNS43MS45MloiLz48cGF0aCBjbGFzcz0iY2xzLTIiIGQ9Ik05My40NiwzNC4yN2wtMzQuODIuMDJjLTIuNy0uMzgtNC4yNC0yLjExLTUuMzctNC42NlY0LjQzYy4wMS0uOTYsMS4wNi0yLjczLDEuODQtMy4xMkw1Ny43Ni4wMWwzNy43Mi4wN2MxLjczLDAsMy44NiwyLjIxLDMuODUsMy44bC0uMDYsMjQuNzJjMCwzLjAxLTMuMDksNC42NC01LjgxLDUuNjdaIi8+PHBhdGggY2xhc3M9ImNscy0yIiBkPSJNNDAuNTUsMzQuMjdsLTM1LjY5LS4wN2MtMS45OCwwLTQuMTctMi4xNi00LjczLTMuOTlWMy4zMUMuMTQuOTgsMy40NywwLDUuMzMsMGwzNi4xOC4wM2MyLjg2LDEuMTEsNC41NywzLjIyLDQuMzcsNi4ydjIyLjYxYy0uNiwyLjkxLTIuMjcsNC43My01LjMzLDUuNDNaIi8+PHBhdGggY2xhc3M9ImNscy0yIiBkPSJNNDUuODgsMTExLjIyYy0uNTYsMS41NC0xLjQ2LDMuOTUtMy4zNCwzLjk1bC0zOS40OS4wN2MtMi4wOS0uNzItMy4yLTIuNTgtMy4wMy00Ljc1di0yNS4xMWMuNjEtMi4wMiwyLjEyLTMuNTQsNC4yMS00LjExbDM2LjMtLjAyYzEuODksMCwzLjU2LjczLDQuMzUsMi41MmwxLDIuMjd2MjUuMTlaIi8+PHBhdGggY2xhc3M9ImNscy0yIiBkPSJNMzUuMTcsNzQuNjJjLTcuNDQuMjktMTQuNjcuMi0yMS45NiwwLTIuNTItLjA3LTQuOTQtLjIyLTcuNDItLjAzLTIuNzEuMzItNC43LTEuNTUtNS43Ni00LjE3TDAsNDQuOTJjLjY0LTIuMTUsMi4yNi0zLjYsNC40OS00LjE1aDM2LjdjMi41NSwxLDMuODIsMi40LDQuNjYsNC45N3YyNC4xMmMtLjY0LDIuMS0xLjg0LDQuNDEtNC4xNyw0LjVsLTYuNTMuMjZaIi8+PHBhdGggY2xhc3M9ImNscy0xIiBkPSJNOTQuMzksNzQuMThsLTM2LjM3LS4wMmMtMi40MSwwLTMuNzMtMi41My00LjUyLTQuNWwuMDQtMjMuNjNjMC0xLjc4LDIuMTctNC44Nyw0LjItNC44OGwzNi41NS0uMTJjMi4xMy44Miw0Ljc3LDIuMjksNC43OCw0Ljc4bC4wNCwyMy42NmMwLDIuMjYtMi4zOCw0LjctNC43Miw0LjdaIi8+PHBhdGggY2xhc3M9ImNscy0yIiBkPSJNMjI0LjI3LDk4LjM2bC0xMy4wMS4wNGMtLjYtLjE0LS45Ni0uNS0uOTMtMS4yM1YxOS41MnMxMy45My0uMDQsMTMuOTMtLjA0djc4Ljg3WiIvPjwvZz48L3N2Zz4=" alt="PlanWerk" /></a>
+      <button class="icon-btn" type="button" aria-label="PlanWerk">
+        <img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz48c3ZnIGlkPSJMYXllcl8yIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA5OS4zMyAxMTUuMjQiPjxkZWZzPjxzdHlsZT4uY2xzLTF7ZmlsbDojODRmZWMzO30uY2xzLTJ7ZmlsbDojZmZmO308L3N0eWxlPjwvZGVmcz48ZyBpZD0iTGF5ZXJfMS0yIj48cGF0aCBjbGFzcz0iY2xzLTIiIGQ9Ik05My40NiwzNC4yN2wtMzQuODIuMDJjLTIuNy0uMzgtNC4yNC0yLjExLTUuMzctNC42NlY0LjQzYy4wMS0uOTYsMS4wNi0yLjczLDEuODQtMy4xMkw1Ny43Ni4wMWwzNy43Mi4wN2MxLjczLDAsMy44NiwyLjIxLDMuODUsMy44bC0uMDYsMjQuNzJjMCwzLjAxLTMuMDksNC42NC01LjgxLDUuNjdaIi8+PHBhdGggY2xhc3M9ImNscy0yIiBkPSJNNDAuNTUsMzQuMjdsLTM1LjY5LS4wN2MtMS45OCwwLTQuMTctMi4xNi00LjczLTMuOTlWMy4zMUMuMTQuOTgsMy40NywwLDUuMzMsMGwzNi4xOC4wM2MyLjg2LDEuMTEsNC41NywzLjIyLDQuMzcsNi4ydjIyLjYxYy0uNiwyLjkxLTIuMjcsNC43My01LjMzLDUuNDNaIi8+PHBhdGggY2xhc3M9ImNscy0yIiBkPSJNNDUuODgsMTExLjIyYy0uNTYsMS41NC0xLjQ2LDMuOTUtMy4zNCwzLjk1bC0zOS40OS4wN2MtMi4wOS0uNzItMy4yLTIuNTgtMy4wMy00Ljc1di0yNS4xMWMuNjEtMi4wMiwyLjEyLTMuNTQsNC4yMS00LjExbDM2LjMtLjAyYzEuODksMCwzLjU2LjczLDQuMzUsMi41MmwxLDIuMjd2MjUuMTlaIi8+PHBhdGggY2xhc3M9ImNscy0yIiBkPSJNMzUuMTcsNzQuNjJjLTcuNDQuMjktMTQuNjcuMi0yMS45NiwwLTIuNTItLjA3LTQuOTQtLjIyLTcuNDItLjAzLTIuNzEuMzItNC43LTEuNTUtNS43Ni00LjE3TDAsNDQuOTJjLjY0LTIuMTUsMi4yNi0zLjYsNC40OS00LjE1aDM2LjdjMi41NSwxLDMuODIsMi40LDQuNjYsNC45N3YyNC4xMmMtLjY0LDIuMS0xLjg0LDQuNDEtNC4xNyw0LjVsLTYuNTMuMjZaIi8+PHBhdGggY2xhc3M9ImNscy0xIiBkPSJNOTQuMzksNzQuMThsLTM2LjM3LS4wMmMtMi40MSwwLTMuNzMtMi41My00LjUyLTQuNWwuMDQtMjMuNjNjMC0xLjc4LDIuMTctNC44Nyw0LjItNC44OGwzNi41NS0uMTJjMi4xMy44Miw0Ljc3LDIuMjksNC43OCw0Ljc4bC4wNCwyMy42NmMwLDIuMjYtMi4zOCw0LjctNC43Miw0LjdaIi8+PC9nPjwvc3ZnPg==" alt="" aria-hidden="true" />
+      </button>
+    </div>
+  </header>
+
+  <main class="hero" id="top">
+    <div class="container">
+      <div class="status rise d1"><span class="dot"></span>Early access · Opening soon</div>
+
+      <h1 class="headline rise d2">Resource capacity planning is about to have its <span class="accent">moment</span>.</h1>
+
+      <p class="sub rise d3">PlanWerk shows who's free, who's buried, and what your team can actually ship. The category may never recover.</p>
+
+      <form class="capture rise d4" id="waitlist" novalidate>
+        <label for="email">Work email</label>
+        <input type="email" id="email" name="email" placeholder="you@company.com" autocomplete="email" required />
+        <button type="submit">Get early access</button>
+      </form>
+
+      <div class="alloc rise d5" id="alloc" aria-hidden="true">
+        <div class="alloc-top"><span class="l">Early access allocation</span><span class="r">92% claimed</span></div>
+        <div class="alloc-bar"><span id="allocFill"></span></div>
+      </div>
+
+      <div class="success rise" id="success" role="status">
+        <span class="tick">✓</span>
+        <p>You're on the list. Early access opens in waves, and you're in the first one.</p>
+      </div>
+
+      <p class="helper rise d6" id="helper">No spam. Just launch news and your early access invite.</p>
+    </div>
+  </main>
+
+  <div class="ticker" aria-hidden="true"><div class="ticker-track" id="track"></div></div>
+
+  <section class="invest">
+    <div class="container invest-grid">
+      <div>
+        <h2>Own a piece of the <span class="accent">capacity revolution</span>.</h2>
+        <p class="lead">PlanWerk is opening a limited early backer allocation ahead of public launch. Get in before the category catches up. Being early is a decision, not an accident.</p>
+        <p class="fineprint">Expression of interest only. This is not an offer to sell securities.</p>
+      </div>
+      <div class="backer-card">
+        <div class="cap">The early backer round</div>
+        <div class="metric"><span class="val mint">$47B</span><span class="lab">Addressable market</span></div>
+        <div class="metric"><span class="val">10×</span><span class="lab">The multiple every deck promises</span></div>
+        <div class="metric"><span class="val">Now</span><span class="lab">The right time to be early</span></div>
+        <button class="cta" type="button" id="investBtn">Register investor interest</button>
+        <div class="backer-ack" id="investAck">Noted. We'll send the early backer brief to your inbox shortly.</div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <div class="container foot-inner">
+      <img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz48c3ZnIGlkPSJMYXllcl8yIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0NDkuODkgODAuMDQiPjxkZWZzPjxzdHlsZT4uY2xzLTF7ZmlsbDojZmZmO308L3N0eWxlPjwvZGVmcz48ZyBpZD0iTGF5ZXJfMS0yIj48cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik00NDMuNTIsMjcuMDFsLTQuOTksNS4yNS03LjM2LDcuNjktNC43OCw0Ljk2LDMuNTcsNS4zOSwxMC4wMSwxNC4yMiw0LjYsNi42Myw1LjMxLDcuODctMTYuNDEuMDktMS40NS0xLjY1LTE1LjE4LTIyLjM1LTYuMDcsNS45My0uNDUsMy41NXYxMi4wNWMuNTguNjYuMzUsMi40Mi0uNjIsMi40MmgtMTMuMDRzMC03Ny4yNywwLTc3LjI3YzAtLjQ1LS4zLTEuMjYtLjA0LTEuNDhzLjkyLS4zMywxLjMxLS4zMmwzLjIyLjExLDkuMTUuMS4wNywyMS41M3YzczAsMTEuMTcsMCwxMS4xN2wtLjA3LDYuMThjLjA0LjI0Ljc5LjUzLjk0LjM1bC42Ny0uNzUsMy40MS0zLjY4LDMuNTYtMy44NSw1LjkxLTYuMTgsMy40Mi0zLjY5LDIuODUtMi44MmgxNi41Yy4xMy4wNC42OS4zMS42MS40M2wtLjQzLjY1LTQuMjIsNC40NFoiLz48cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik0zNzAuMzYsNzguMTFjMCwuNTEtMSwuOTktMS40Ny45OWwtMTIuNzMtLjE0VjIxLjU2czEzLjU3LS4wNSwxMy41Ny0uMDVjLjYxLjQyLjUyLDEuNjcuNTEsMi4zN2wtLjA5LDQuMDJjLS4wMi4xOC41MS41Ny42Mi40M2wuNTItLjZjMS4wNS0xLjIxLDEuODUtMi40NiwzLjEtMy40LDIuMzUtMS43Nyw0LjgyLTIuOCw3LjY5LTMuMzMsMi41NS0uNDcsNS4xNC0uNzEsNy41Mi40NWwuMDcsMTEuODFjMCwuNTIuMTQsMS43My0uNTUsMS42NmwtNC44My0uNWMtMi4xNy0uMjItNC4wMS4zMy02LjA5LDEuMDktNC40MywxLjYzLTcuNDMsNS44MS03LjY4LDEwLjY0bC0uMzEsNS44OS4wMiw5LjUxLjE1LDE2LjU1WiIvPjxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTI5MS40NiwyMS45OWwtNi4xLDIwLjA4LTYuMjYsMTguNTItNC41OSwxNC4wMi0xLjU5LDQuNDhoLTEzLjc5cy0xLjc5LTUuMzItMS43OS01LjMybC0xMC4zLTMxLjQ0LTQuMzgsMTIuOTQtNi4yNywxOS40LTEuNjQsNC40MmgtMTMuMjFjLS42MywwLTEuMTQtMS4zLTEuMzItMS44OGwtNy40LTIyLjc1LTkuOTYtMjkuODljLS4yNS0uNzUtLjgzLTEuNzEtLjgyLTIuNSwwLS4zOCwxLjItLjU4LDEuNTMtLjNoMTEuMTVjLjUyLS4xNywxLjMzLS4yNSwxLjc4LS4wOS4zOS4xNC41OC45Mi43NSwxLjUxbDguMTQsMjcuMjYsMi41NSw5Yy4xOS4wOC43MS4yMy43Ni4wNmwuMjEtLjgxLDIuMTYtNy4zNCwzLjE1LTkuODQsNS43Ni0xOC43M2MuMTMtLjQyLjc3LTEuMSwxLjA5LTEuMjhoMTIuMTZjLjg0LjM4LDEsMS4wNywxLjI5LDEuOTlsMTAuODUsMzUuMTkuMzguOTFjLjA4LjE5LjYtLjU4LjY3LS43M2wxMC43OS0zNy4zMiwxMi43My0uMDZjLjM0LDAsMS4wMi4yNiwxLjUxLjUyWiIvPjxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTM4Ljc2LDUwLjAyYy0yLjY3Ljc0LTUuMjkuNzQtOC4wMi43NWwtMi4wMy4yMy0xNC4yMi4wNXYyNi44N2MwLC4yNC0uMi44OS0uNDEuOTctLjI2LjExLS43Mi4wOS0xLjIuMDVsLTEuOTIuMTQtMTAuOTctLjAyVi4yM1M4LjE5LjA3LDguMTkuMDdsMTEuMzYtLjA0LDcuOTgtLjAyLDQuMzUuMDJjNy43NS4wNCwxNi42LDMuOTIsMjEuMjEsMTAuMzcsMy4zNiw0LjcsNC40OCwxMC40LDQuMzksMTYuMDhsLS41MSw0LjI0Yy0uNjksNS43MS0zLjc3LDEwLjQtOC4wNSwxNC4yMi0yLjg1LDIuNTQtNi4yNiw0LTEwLjE0LDUuMDhaTTMwLjMzLDM4LjAzbDQuNzEtMS4wMmM0LjItMS40MSw2Ljk3LTQuNzUsNy42Mi05LjAxLDEuMjQtOC4xNS0zLjExLTEzLjI4LTExLjA4LTE0Ljc1bC0xNi4xMi0uMDMtMS4xMi41N2MtLjI1LjEzLjEzLjk4LjEyLDEuMjdsLS4wNiw1Ljc4djQuODJzLjA2LDEwLjI1LjA2LDEwLjI1YzAsLjMzLS4zMSwxLjI0LS4wMiwxLjRsMS4yOS43MmgxNC42WiIvPjxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTM0MS41MSw2Mi4zOGw1LjM3Ljg4Yy0xLjUyLDQuOTItNC44NCw4Ljk4LTkuMTMsMTEuOTQtNS4xOCwzLjU3LTExLjMyLDUuMDQtMTcuNjYsNC43OWwtNS4xMy0uNTFjLTEwLjMzLTEuODgtMTcuMzItOC42NC0yMC40OS0xOC41NGwtLjg0LTMuMzNjLS42Mi0yLjQ2LTEuMDQtNC45My0uNzktNy40NmwuNTYtNS42N2MyLjMtMTQuODcsMTMuNTctMjQuMTksMjguNzctMjMuOTIsNy41OS4xNCwxNC40NSwzLjI3LDE5LjQ1LDkuMDQsMy44OSw0LjQ5LDUuODcsMTAuMjksNi40NCwxNi4yNGwuMDgsOS4wNWgtNDAuMzljLjMxLDguNzMsOC41MiwxNC43MywxNi42MywxMi44OSwzLjg5LS44OCw3LjM2LTIuOTIsOS4wOS02LjY4bDMuNjUuNDgsNC40MS44MVpNMzMyLjUsNDMuOTRjLjMyLS4wNiwxLjAyLS4zLDEuMDctLjU3LjItMS4xLTEuNjUtNS43MS0zLjg5LTcuNTctNC4wOC0zLjQtOS45Mi00LjExLTE0LjgxLTEuNzEtMy42OCwxLjgtNi4wNCw1LjQ5LTYuOTcsOS4zOGwzLjA2LjQ3aDIxLjU0WiIvPjxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTg5LjI5LDcxLjczYy01LjEtNy42Mi0yLjkzLTE5LjY2LDYuODMtMjQuMjUsNC45Mi0yLjMyLDEwLjIyLTIuNzUsMTUuNTYtMy4xbDQuNDUtLjI5LDYuODgtLjZjLjA3LTEuMjYuMjYtMywwLTQuMjMtLjc3LTMuNjUtMy45NC01LjktNy41LTYuMzgtNC43MS0uNjMtMTAuMDcuMDgtMTIuMzIsNC4xNmwtMS4zNSwzLjMyLTIuOC0uMTJjLTMuNTUtLjE2LTYuODEtLjQ4LTEwLjMyLTEuMmwuNDItMi4xYzEuMTktNS45OCw0LjkzLTExLjE3LDEwLjU5LTEzLjY1bDUuNzctMS45OGMzLjU2LTEuMjIsMTEuNTUtLjk0LDE1Ljg0LjE1LDMuMDEuNzcsNS45NiwyLjA3LDguNDMsMy45OSw0LjQ0LDMuNDYsNy4zNyw5LjY1LDcuMzksMTUuMDhsLjE0LDM4LjQ4LTEyLjE0LjA5Yy0uMjUsMC0xLS4xMS0xLjAzLS4zNWwtLjE1LTEuMTEtLjI0LTMuMmMuMTEtLjY3LjM5LTEuMjQtLjQ1LTEuNzMtMi43OCwzLjUtNi4yNyw1LjY4LTEwLjYxLDYuNjUtOC41NCwxLjkyLTE4LjMzLS4xMS0yMy4zNy03LjYzWk0xMDQuODMsNjcuNjFjNi4yNCwyLjQ3LDE0LjUtLjAxLDE3LjQ1LTYuMDMsMS4xOS0yLjQzLDEuMTktNC44Mi45OS03LjU1bC0zLjc2LjE0LTUuMzUuNTYtMy44Mi4zN2MtMy4yOS4zMi03LjQ1LDEuNjktOC44Nyw0LjQ3LTEuNiwzLjEzLjA4LDYuNzQsMy4zNiw4LjA0WiIvPjxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTE2NS4xNCwzNi41Yy0yLjI0LDEuOTktMy43OSw1LjA5LTMuOCw4LjA5bC0uMTEsMzMuODVjLS40Ny4zNS0xLjIzLjY4LTEuNzUuNjhsLTEyLjQzLS4xVjIyLjcxYzAtLjM2LjI4LTEuMDkuNTUtMS4xMWwxLjE2LS4wNSwxMS4zMi0uMDljLjQ5LDAsMS4xNC43MSwxLjE0LDEuMTJsLjA2LDUuMzNjLjk2LS41NiwxLjA0LS45NSwxLjYyLTEuNTUsMi45OC0zLjEyLDcuMi01LjMsMTEuNjEtNS42OWw3LjEyLjA0YzEuNDYsMCwzLjI4LjY0LDQuNTksMS4yMSw1LjU5LDIuNDMsOS45LDYuOCwxMS41OCwxMi42My4zNCwxLjE3LjkyLDIuNjMuOTMsMy43OWwuMjEsMjAuODMuMDIsMTIuNDEtLjIyLDcuNTEtMTMuNTEtLjA1LS4xNy0zNC4zM2MtLjAyLTMuNTUtMS40LTcuMDgtNC4yMS05LjEzLTQuNjYtMy40LTExLjI4LTMuMDEtMTUuNzEuOTJaIi8+PHBhdGggY2xhc3M9ImNscy0xIiBkPSJNNzguNzIsNzkuMDZsLTEzLjAxLjA0Yy0uNi0uMTQtLjk2LS41LS45My0xLjIzVi4yMnMxMy45My0uMDQsMTMuOTMtLjA0djc4Ljg3WiIvPjwvZz48L3N2Zz4=" alt="PlanWerk" />
+      <span class="cr">© 2026 PlanWerk. All rights reserved.</span>
+    </div>
+  </footer>
+</div>
+
+<script>
+  /* ---------- Allocation meter fills on load (scarcity + capacity motif) ---------- */
+  requestAnimationFrame(function(){
+    setTimeout(function(){ document.getElementById('allocFill').style.width = '92%'; }, 500);
+  });
+
+  /* ---------- Buzzword ticker ---------- */
+  const words = ['Synergy-native','Capacity-first','AI-adjacent','Timesheet-agnostic','Gantt-native',
+    'Radically allocated','Real-time everything','Cloud-shaped','Zero-standup','Enterprise-grade'];
+  const line = words.map(w => '<span>'+w+'</span>').join('');
+  document.getElementById('track').innerHTML = line + line;
+
+  /* ---------- Waitlist (gag: no backend) ----------
+     TODO: to collect real emails, POST to a Formspree / Mailchimp endpoint here.
+  */
+  const form = document.getElementById('waitlist');
+  const success = document.getElementById('success');
+  const helper = document.getElementById('helper');
+  const alloc = document.getElementById('alloc');
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    const email = document.getElementById('email');
+    const ok = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim());
+    if(!ok){
+      form.style.borderColor = '#ff8f8f';
+      helper.textContent = 'That email does not look quite right. Mind checking it?';
+      helper.style.color = '#ff8f8f';
+      email.focus();
+      return;
+    }
+    // Replace with real submission (see TODO).
+    form.style.display = 'none';
+    alloc.style.display = 'none';
+    helper.style.display = 'none';
+    success.classList.add('show');
+  });
+
+  /* ---------- Investor interest (gag: no backend) ----------
+     TODO: wire to a real form / CRM if you ever take this seriously.
+  */
+  const investBtn = document.getElementById('investBtn');
+  const investAck = document.getElementById('investAck');
+  investBtn.addEventListener('click', function(){
+    investBtn.style.display = 'none';
+    investAck.classList.add('show');
+  });
+</script>
+</body>
+</html>
