@@ -99,6 +99,11 @@
   .icon-btn img{height:20px;width:auto;display:block;animation:spin-icon 24s linear infinite;}
   .icon-btn:hover{border-color:var(--mint);background:rgba(132,254,195,.06);transform:translateY(-1px);}
   @keyframes spin-icon{to{transform:rotate(360deg);}}
+  .nav-links{display:flex;align-items:center;gap:28px;}
+  .nav-links a{font-family:"JetBrains Mono",monospace;font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;
+    color:var(--muted);transition:color .2s ease;}
+  .nav-links a:hover{color:var(--mint);}
+  .nav-right{display:flex;align-items:center;gap:20px;}
 
   /* ---------- Hero ---------- */
   main.hero{
@@ -179,13 +184,35 @@
   .ticker-track span::after{content:"◆";color:var(--mint);opacity:.55;font-size:8px;}
   @keyframes marquee{to{transform:translateX(-50%);}}
 
+  /* ---------- Trusted-by / social proof ---------- */
+  .trust{position:relative;z-index:1;padding:clamp(56px,8vw,88px) 0;border-bottom:1px solid var(--line);}
+  .trust-head{max-width:620px;margin:0 auto 40px;text-align:center;}
+  .trust-head .eyebrow{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--faint);margin-bottom:14px;}
+  .trust-head h2{font-weight:600;font-size:clamp(26px,3.6vw,40px);line-height:1.14;letter-spacing:-.02em;margin:0 0 14px;}
+  .trust-head h2 .accent{color:var(--mint);}
+  .trust-head p{color:var(--muted);font-size:clamp(14px,1.5vw,16px);line-height:1.6;margin:0;}
+
+  .trust-stats{display:flex;justify-content:center;gap:clamp(28px,7vw,72px);flex-wrap:wrap;margin:0 0 48px;}
+  .tstat{text-align:center;}
+  .tstat .val{display:block;font-weight:600;font-size:clamp(26px,3.2vw,34px);letter-spacing:-.01em;color:var(--mint);}
+  .tstat .lab{display:block;margin-top:5px;font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);}
+
+  .logo-marquee{position:relative;overflow:hidden;padding:6px 0;
+    -webkit-mask:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent);
+    mask:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent);}
+  .logo-track{display:inline-flex;white-space:nowrap;animation:marquee 32s linear infinite;}
+  .logo-track span{font-family:"Space Grotesk",sans-serif;font-weight:600;font-size:clamp(17px,2vw,20px);
+    letter-spacing:.01em;color:var(--faint);padding:0 32px;opacity:.75;
+    transition:opacity .25s ease,color .25s ease;cursor:default;}
+  .logo-track span:hover{opacity:1;color:var(--ink);}
+
   /* ---------- Investor section ---------- */
   .invest{position:relative;z-index:1;padding:clamp(72px,11vw,128px) 0;border-bottom:1px solid var(--line);}
   .invest-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(32px,5vw,64px);align-items:center;}
   .invest h2{font-weight:600;font-size:clamp(30px,4.6vw,52px);line-height:1.04;letter-spacing:-.02em;margin:0 0 20px;max-width:16ch;}
   .invest h2 .accent{color:var(--mint);}
   .invest p.lead{color:var(--muted);font-size:clamp(15px,1.6vw,17px);line-height:1.6;max-width:52ch;margin:0 0 24px;}
-  .invest .fineprint{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.06em;color:var(--faint);margin:20px 0 0;}
+  .invest .fineprint,.offices .fineprint{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.06em;color:var(--faint);margin:20px 0 0;}
 
   .backer-card{border:1px solid var(--line-2);border-radius:20px;background:linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,.01));
     padding:clamp(22px,3vw,30px);box-shadow:0 30px 70px rgba(0,0,0,.4);}
@@ -204,6 +231,32 @@
     background:rgba(132,254,195,.07);font-size:14px;line-height:1.5;}
   .backer-ack.show{display:block;animation:rise .5s ease both;}
   @media (max-width:820px){.invest-grid{grid-template-columns:1fr;}}
+
+  /* ---------- Offices / world map ---------- */
+  .offices{position:relative;z-index:1;padding:clamp(72px,11vw,128px) 0;border-bottom:1px solid var(--line);}
+  .offices-head{max-width:640px;margin:0 auto 40px;text-align:center;}
+  .offices-head h2{font-weight:600;font-size:clamp(30px,4.6vw,52px);line-height:1.04;letter-spacing:-.02em;margin:0 0 16px;}
+  .offices-head h2 .accent{color:var(--mint);}
+  .offices-head p{color:var(--muted);font-size:clamp(15px,1.6vw,17px);line-height:1.6;margin:0;}
+
+  .map-card{border:1px solid var(--line-2);border-radius:20px;overflow:hidden;
+    background:linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,.01));
+    padding:clamp(10px,2.4vw,22px);box-shadow:0 30px 70px rgba(0,0,0,.4);margin-bottom:22px;}
+  .worldmap{display:block;width:100%;height:auto;}
+  .landdot{fill:var(--faint);opacity:.55;}
+  .route{fill:none;stroke:var(--mint);stroke-width:1.6;opacity:.16;}
+  .pin-halo{fill:var(--mint);opacity:.22;transform-box:fill-box;transform-origin:center;animation:pin-pulse 2.6s ease-in-out infinite;}
+  .pin-dot{fill:var(--mint);}
+  @keyframes pin-pulse{0%,100%{opacity:.22;transform:scale(1);}50%{opacity:.04;transform:scale(1.9);}}
+
+  .office-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1px;
+    background:var(--line);border:1px solid var(--line);border-radius:16px;overflow:hidden;}
+  .office-card{background:var(--bg);padding:18px 20px;}
+  .office-card .city{display:flex;align-items:center;gap:8px;font-weight:600;font-size:14.5px;margin-bottom:6px;}
+  .office-card .city .bullet{width:6px;height:6px;border-radius:50%;background:var(--mint);flex:none;box-shadow:0 0 8px var(--mint);}
+  .office-card .city .hq-tag{color:var(--mint);font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.1em;}
+  .office-card .country{font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);margin:0 0 8px 14px;}
+  .office-card .tag{font-size:13px;color:var(--muted);line-height:1.5;margin:0 0 0 14px;}
 
   /* ---------- Footer ---------- */
   footer.foot{position:relative;z-index:1;padding:34px 0 40px;}
@@ -239,9 +292,12 @@
   <header class="nav">
     <div class="container nav-inner">
       <a class="brand" href="#top" aria-label="PlanWerk"><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz48c3ZnIGlkPSJMYXllcl8yIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1OTUuNDQgMTE1LjI0Ij48ZGVmcz48c3R5bGU+LmNscy0xe2ZpbGw6Izg0ZmVjMzt9LmNscy0ye2ZpbGw6I2ZmZjt9PC9zdHlsZT48L2RlZnM+PGcgaWQ9IkxheWVyXzEtMiI+PHBhdGggY2xhc3M9ImNscy0yIiBkPSJNNTg5LjA3LDQ2LjNsLTQuOTksNS4yNS03LjM2LDcuNjktNC43OCw0Ljk2LDMuNTcsNS4zOSwxMC4wMSwxNC4yMiw0LjYsNi42Myw1LjMxLDcuODctMTYuNDEuMDktMS40NS0xLjY1LTE1LjE4LTIyLjM1LTYuMDcsNS45My0uNDUsMy41NXYxMi4wNWMuNTguNjYuMzUsMi40Mi0uNjIsMi40MmgtMTMuMDRzMC03Ny4yNywwLTc3LjI3YzAtLjQ1LS4zLTEuMjYtLjA0LTEuNDhzLjkyLS4zMywxLjMxLS4zMmwzLjIyLjExLDkuMTUuMS4wNywyMS41M3YzczAsMTEuMTcsMCwxMS4xN2wtLjA3LDYuMThjLjA0LjI0Ljc5LjUzLjk0LjM1bC42Ny0uNzUsMy40MS0zLjY4LDMuNTYtMy44NSw1LjkxLTYuMTgsMy40Mi0zLjY5LDIuODUtMi44MmgxNi41Yy4xMy4wNC42OS4zMS42MS40M2wtLjQzLjY1LTQuMjIsNC40NFoiLz48cGF0aCBjbGFzcz0iY2xzLTIiIGQ9Ik01MTUuOTEsOTcuNDFjMCwuNTEtMSwuOTktMS40Ny45OWwtMTIuNzMtLjE0di01Ny40czEzLjU3LS4wNSwxMy41Ny0uMDVjLjYxLjQyLjUyLDEuNjcuNTEsMi4zN2wtLjA5LDQuMDJjLS4wMi4xOC41MS41Ny42Mi40M2wuNTItLjZjMS4wNS0xLjIxLDEuODUtMi40NiwzLjEtMy40LDIuMzUtMS43Nyw0LjgyLTIuOCw3LjY5LTMuMzMsMi41NS0uNDcsNS4xNC0uNzEsNy41Mi40NWwuMDcsMTEuODFjMCwuNTIuMTQsMS43My0uNTUsMS42NmwtNC44My0uNWMtMi4xNy0uMjItNC4wMS4zMy02LjA5LDEuMDktNC40MywxLjYzLTcuNDMsNS44MS03LjY4LDEwLjY0bC0uMzEsNS44OS4wMiw5LjUxLjE1LDE2LjU1WiIvPjxwYXRoIGNsYXNzPSJjbHMtMiIgZD0iTTQzNyw0MS4yOWwtNi4xLDIwLjA4LTYuMjYsMTguNTItNC41OSwxNC4wMi0xLjU5LDQuNDhoLTEzLjc5cy0xLjc5LTUuMzItMS43OS01LjMybC0xMC4zLTMxLjQ0LTQuMzgsMTIuOTQtNi4yNywxOS40LTEuNjQsNC40MmgtMTMuMjFjLS42MywwLTEuMTQtMS4zLTEuMzItMS44OGwtNy40LTIyLjc1LTkuOTYtMjkuODljLS4yNS0uNzUtLjgzLTEuNzEtLjgyLTIuNSwwLS4zOCwxLjItLjU4LDEuNTMtLjNoMTEuMTVjLjUyLS4xNywxLjMzLS4yNSwxLjc4LS4wOS4zOS4xNC41OC45Mi43NSwxLjUxbDguMTQsMjcuMjYsMi41NSw5Yy4xOS4wOC43MS4yMy43Ni4wNmwuMjEtLjgxLDIuMTYtNy4zNCwzLjE1LTkuODQsNS43Ni0xOC43M2MuMTMtLjQyLjc3LTEuMSwxLjA5LTEuMjhoMTIuMTZjLjg0LjM4LDEsMS4wNywxLjI5LDEuOTlsMTAuODUsMzUuMTkuMzguOTFjLjA4LjE5LjYtLjU4LjY3LS43M2wxMC43OS0zNy4zMiwxMi43My0uMDZjLjM0LDAsMS4wMi4yNiwxLjUxLjUyWiIvPjxwYXRoIGNsYXNzPSJjbHMtMiIgZD0iTTE4NC4zMSw2OS4zMmMtMi42Ny43NC01LjI5Ljc0LTguMDIuNzVsLTIuMDMuMjMtMTQuMjIuMDV2MjYuODdjMCwuMjQtLjIuODktLjQxLjk3LS4yNi4xMS0uNzIuMDktMS4yLjA1bC0xLjkyLjE0LTEwLjk3LS4wMlYxOS41MnM4LjE5LS4xNSw4LjE5LS4xNWwxMS4zNi0uMDQsNy45OC0uMDIsNC4zNS4wMmM3Ljc1LjA0LDE2LjYsMy45MiwyMS4yMSwxMC4zNywzLjM2LDQuNyw0LjQ4LDEwLjQsNC4zOSwxNi4wOGwtLjUxLDQuMjRjLS42OSw1LjcxLTMuNzcsMTAuNC04LjA1LDE0LjIyLTIuODUsMi41NC02LjI2LDQtMTAuMTQsNS4wOFpNMTc1Ljg4LDU3LjMzbDQuNzEtMS4wMmM0LjItMS40MSw2Ljk3LTQuNzUsNy42Mi05LjAxLDEuMjQtOC4xNS0zLjExLTEzLjI4LTExLjA4LTE0Ljc1bC0xNi4xMi0uMDMtMS4xMi41N2MtLjI1LjEzLjEzLjk4LjEyLDEuMjdsLS4wNiw1Ljc4djQuODJzLjA2LDEwLjI1LjA2LDEwLjI1YzAsLjMzLS4zMSwxLjI0LS4wMiwxLjRsMS4yOS43MmgxNC42WiIvPjxwYXRoIGNsYXNzPSJjbHMtMiIgZD0iTTQ4Ny4wNiw4MS42OGw1LjM3Ljg4Yy0xLjUyLDQuOTItNC44NCw4Ljk4LTkuMTMsMTEuOTQtNS4xOCwzLjU3LTExLjMyLDUuMDQtMTcuNjYsNC43OWwtNS4xMy0uNTFjLTEwLjMzLTEuODgtMTcuMzItOC42NC0yMC40OS0xOC41NGwtLjg0LTMuMzNjLS42Mi0yLjQ2LTEuMDQtNC45My0uNzktNy40NmwuNTYtNS42N2MyLjMtMTQuODcsMTMuNTctMjQuMTksMjguNzctMjMuOTIsNy41OS4xNCwxNC40NSwzLjI3LDE5LjQ1LDkuMDQsMy44OSw0LjQ5LDUuODcsMTAuMjksNi40NCwxNi4yNGwuMDgsOS4wNWgtNDAuMzljLjMxLDguNzMsOC41MiwxNC43MywxNi42MywxMi44OSwzLjg5LS44OCw3LjM2LTIuOTIsOS4wOS02LjY4bDMuNjUuNDgsNC40MS44MVpNNDc4LjA1LDYzLjIzYy4zMi0uMDYsMS4wMi0uMywxLjA3LS41Ny4yLTEuMS0xLjY1LTUuNzEtMy44OS03LjU3LTQuMDgtMy40LTkuOTItNC4xMS0xNC44MS0xLjcxLTMuNjgsMS44LTYuMDQsNS40OS02Ljk3LDkuMzhsMy4wNi40N2gyMS41NFoiLz48cGF0aCBjbGFzcz0iY2xzLTIiIGQ9Ik0yMzQuODQsOTEuMDNjLTUuMS03LjYyLTIuOTMtMTkuNjYsNi44My0yNC4yNSw0LjkyLTIuMzIsMTAuMjItMi43NSwxNS41Ni0zLjFsNC40NS0uMjksNi44OC0uNmMuMDctMS4yNi4yNi0zLDAtNC4yMy0uNzctMy42NS0zLjk0LTUuOS03LjUtNi4zOC00LjcxLS42My0xMC4wNy4wOC0xMi4zMiw0LjE2bC0xLjM1LDMuMzItMi44LS4xMmMtMy41NS0uMTYtNi44MS0uNDgtMTAuMzItMS4ybC40Mi0yLjFjMS4xOS01Ljk4LDQuOTMtMTEuMTcsMTAuNTktMTMuNjVsNS43Ny0xLjk4YzMuNTYtMS4yMiwxMS41NS0uOTQsMTUuODQuMTUsMy4wMS43Nyw1Ljk2LDIuMDcsOC40MywzLjk5LDQuNDQsMy40Niw3LjM3LDkuNjUsNy4zOSwxNS4wOGwuMTQsMzguNDgtMTIuMTQuMDljLS4yNSwwLTEtLjExLTEuMDMtLjM1bC0uMTUtMS4xMS0uMjQtMy4yYy4xMS0uNjcuMzktMS4yNC0uNDUtMS43My0yLjc4LDMuNS02LjI3LDUuNjgtMTAuNjEsNi42NS04LjU0LDEuOTItMTguMzMtLjExLTIzLjM3LTcuNjNaTTI1MC4zOCw4Ni45YzYuMjQsMi40NywxNC41LS4wMSwxNy40NS02LjAzLDEuMTktMi40MywxLjE5LTQuODIuOTktNy41NWwtMy43Ni4xNC01LjM1LjU2LTMuODIuMzdjLTMuMjkuMzItNy40NSwxLjY5LTguODcsNC40Ny0xLjYsMy4xMy4wOCw2Ljc0LDMuMzYsOC4wNFoiLz48cGF0aCBjbGFzcz0iY2xzLTIiIGQ9Ik0zMTAuNjksNTUuNzljLTIuMjQsMS45OS0zLjc5LDUuMDktMy44LDguMDlsLS4xMSwzMy44NWMtLjQ3LjM1LTEuMjMuNjgtMS43NS42OGwtMTIuNDMtLjF2LTU2LjNjMC0uMzYuMjgtMS4wOS41NS0xLjExbDEuMTYtLjA1LDExLjMyLS4wOWMuNDksMCwxLjE0LjcxLDEuMTQsMS4xMmwuMDYsNS4zM2MuOTYtLjU2LDEuMDQtLjk1LDEuNjItMS41NSwyLjk4LTMuMTIsNy4yLTUuMywxMS42MS01LjY5bDcuMTIuMDRjMS40NiwwLDMuMjguNjQsNC41OSwxLjIxLDUuNTksMi40Myw5LjksNi44LDExLjU4LDEyLjYzLjM0LDEuMTcuOTIsMi42My45MywzLjc5bC4yMSwyMC44My4wMiwxMi40MS0uMjIsNy41MS0xMy41MS0uMDUtLjE3LTM0LjMzYy0uMDItMy41NS0xLjQtNy4wOC00LjIxLTkuMTMtNC42Ni0zLjQtMTEuMjgtMy4wMS0xNS43MS45MloiLz48cGF0aCBjbGFzcz0iY2xzLTIiIGQ9Ik05My40NiwzNC4yN2wtMzQuODIuMDJjLTIuNy0uMzgtNC4yNC0yLjExLTUuMzctNC42NlY0LjQzYy4wMS0uOTYsMS4wNi0yLjczLDEuODQtMy4xMkw1Ny43Ni4wMWwzNy43Mi4wN2MxLjczLDAsMy44NiwyLjIxLDMuODUsMy44bC0uMDYsMjQuNzJjMCwzLjAxLTMuMDksNC42NC01LjgxLDUuNjdaIi8+PHBhdGggY2xhc3M9ImNscy0yIiBkPSJNNDAuNTUsMzQuMjdsLTM1LjY5LS4wN2MtMS45OCwwLTQuMTctMi4xNi00LjczLTMuOTlWMy4zMUMuMTQuOTgsMy40NywwLDUuMzMsMGwzNi4xOC4wM2MyLjg2LDEuMTEsNC41NywzLjIyLDQuMzcsNi4ydjIyLjYxYy0uNiwyLjkxLTIuMjcsNC43My01LjMzLDUuNDNaIi8+PHBhdGggY2xhc3M9ImNscy0yIiBkPSJNNDUuODgsMTExLjIyYy0uNTYsMS41NC0xLjQ2LDMuOTUtMy4zNCwzLjk1bC0zOS40OS4wN2MtMi4wOS0uNzItMy4yLTIuNTgtMy4wMy00Ljc1di0yNS4xMWMuNjEtMi4wMiwyLjEyLTMuNTQsNC4yMS00LjExbDM2LjMtLjAyYzEuODksMCwzLjU2LjczLDQuMzUsMi41MmwxLDIuMjd2MjUuMTlaIi8+PHBhdGggY2xhc3M9ImNscy0yIiBkPSJNMzUuMTcsNzQuNjJjLTcuNDQuMjktMTQuNjcuMi0yMS45NiwwLTIuNTItLjA3LTQuOTQtLjIyLTcuNDItLjAzLTIuNzEuMzItNC43LTEuNTUtNS43Ni00LjE3TDAsNDQuOTJjLjY0LTIuMTUsMi4yNi0zLjYsNC40OS00LjE1aDM2LjdjMi41NSwxLDMuODIsMi40LDQuNjYsNC45N3YyNC4xMmMtLjY0LDIuMS0xLjg0LDQuNDEtNC4xNyw0LjVsLTYuNTMuMjZaIi8+PHBhdGggY2xhc3M9ImNscy0xIiBkPSJNOTQuMzksNzQuMThsLTM2LjM3LS4wMmMtMi40MSwwLTMuNzMtMi41My00LjUyLTQuNWwuMDQtMjMuNjNjMC0xLjc4LDIuMTctNC44Nyw0LjItNC44OGwzNi41NS0uMTJjMi4xMy44Miw0Ljc3LDIuMjksNC43OCw0Ljc4bC4wNCwyMy42NmMwLDIuMjYtMi4zOCw0LjctNC43Miw0LjdaIi8+PHBhdGggY2xhc3M9ImNscy0yIiBkPSJNMjI0LjI3LDk4LjM2bC0xMy4wMS4wNGMtLjYtLjE0LS45Ni0uNS0uOTMtMS4yM1YxOS41MnMxMy45My0uMDQsMTMuOTMtLjA0djc4Ljg3WiIvPjwvZz48L3N2Zz4=" alt="PlanWerk" /></a>
-      <button class="icon-btn" type="button" aria-label="PlanWerk">
-        <img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz48c3ZnIGlkPSJMYXllcl8yIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA5OS4zMyAxMTUuMjQiPjxkZWZzPjxzdHlsZT4uY2xzLTF7ZmlsbDojODRmZWMzO30uY2xzLTJ7ZmlsbDojZmZmO308L3N0eWxlPjwvZGVmcz48ZyBpZD0iTGF5ZXJfMS0yIj48cGF0aCBjbGFzcz0iY2xzLTIiIGQ9Ik05My40NiwzNC4yN2wtMzQuODIuMDJjLTIuNy0uMzgtNC4yNC0yLjExLTUuMzctNC42NlY0LjQzYy4wMS0uOTYsMS4wNi0yLjczLDEuODQtMy4xMkw1Ny43Ni4wMWwzNy43Mi4wN2MxLjczLDAsMy44NiwyLjIxLDMuODUsMy44bC0uMDYsMjQuNzJjMCwzLjAxLTMuMDksNC42NC01LjgxLDUuNjdaIi8+PHBhdGggY2xhc3M9ImNscy0yIiBkPSJNNDAuNTUsMzQuMjdsLTM1LjY5LS4wN2MtMS45OCwwLTQuMTctMi4xNi00LjczLTMuOTlWMy4zMUMuMTQuOTgsMy40NywwLDUuMzMsMGwzNi4xOC4wM2MyLjg2LDEuMTEsNC41NywzLjIyLDQuMzcsNi4ydjIyLjYxYy0uNiwyLjkxLTIuMjcsNC43My01LjMzLDUuNDNaIi8+PHBhdGggY2xhc3M9ImNscy0yIiBkPSJNNDUuODgsMTExLjIyYy0uNTYsMS41NC0xLjQ2LDMuOTUtMy4zNCwzLjk1bC0zOS40OS4wN2MtMi4wOS0uNzItMy4yLTIuNTgtMy4wMy00Ljc1di0yNS4xMWMuNjEtMi4wMiwyLjEyLTMuNTQsNC4yMS00LjExbDM2LjMtLjAyYzEuODksMCwzLjU2LjczLDQuMzUsMi41MmwxLDIuMjd2MjUuMTlaIi8+PHBhdGggY2xhc3M9ImNscy0yIiBkPSJNMzUuMTcsNzQuNjJjLTcuNDQuMjktMTQuNjcuMi0yMS45NiwwLTIuNTItLjA3LTQuOTQtLjIyLTcuNDItLjAzLTIuNzEuMzItNC43LTEuNTUtNS43Ni00LjE3TDAsNDQuOTJjLjY0LTIuMTUsMi4yNi0zLjYsNC40OS00LjE1aDM2LjdjMi41NSwxLDMuODIsMi40LDQuNjYsNC45N3YyNC4xMmMtLjY0LDIuMS0xLjg0LDQuNDEtNC4xNyw0LjVsLTYuNTMuMjZaIi8+PHBhdGggY2xhc3M9ImNscy0xIiBkPSJNOTQuMzksNzQuMThsLTM2LjM3LS4wMmMtMi40MSwwLTMuNzMtMi41My00LjUyLTQuNWwuMDQtMjMuNjNjMC0xLjc4LDIuMTctNC44Nyw0LjItNC44OGwzNi41NS0uMTJjMi4xMy44Miw0Ljc3LDIuMjksNC43OCw0Ljc4bC4wNCwyMy42NmMwLDIuMjYtMi4zOCw0LjctNC43Miw0LjdaIi8+PC9nPjwvc3ZnPg==" alt="" aria-hidden="true" />
-      </button>
+      <div class="nav-right">
+        <nav class="nav-links"><a href="about.html">About</a></nav>
+        <button class="icon-btn" type="button" aria-label="PlanWerk">
+          <img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz48c3ZnIGlkPSJMYXllcl8yIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA5OS4zMyAxMTUuMjQiPjxkZWZzPjxzdHlsZT4uY2xzLTF7ZmlsbDojODRmZWMzO30uY2xzLTJ7ZmlsbDojZmZmO308L3N0eWxlPjwvZGVmcz48ZyBpZD0iTGF5ZXJfMS0yIj48cGF0aCBjbGFzcz0iY2xzLTIiIGQ9Ik05My40NiwzNC4yN2wtMzQuODIuMDJjLTIuNy0uMzgtNC4yNC0yLjExLTUuMzctNC42NlY0LjQzYy4wMS0uOTYsMS4wNi0yLjczLDEuODQtMy4xMkw1Ny43Ni4wMWwzNy43Mi4wN2MxLjczLDAsMy44NiwyLjIxLDMuODUsMy44bC0uMDYsMjQuNzJjMCwzLjAxLTMuMDksNC42NC01LjgxLDUuNjdaIi8+PHBhdGggY2xhc3M9ImNscy0yIiBkPSJNNDAuNTUsMzQuMjdsLTM1LjY5LS4wN2MtMS45OCwwLTQuMTctMi4xNi00LjczLTMuOTlWMy4zMUMuMTQuOTgsMy40NywwLDUuMzMsMGwzNi4xOC4wM2MyLjg2LDEuMTEsNC41NywzLjIyLDQuMzcsNi4ydjIyLjYxYy0uNiwyLjkxLTIuMjcsNC43My01LjMzLDUuNDNaIi8+PHBhdGggY2xhc3M9ImNscy0yIiBkPSJNNDUuODgsMTExLjIyYy0uNTYsMS41NC0xLjQ2LDMuOTUtMy4zNCwzLjk1bC0zOS40OS4wN2MtMi4wOS0uNzItMy4yLTIuNTgtMy4wMy00Ljc1di0yNS4xMWMuNjEtMi4wMiwyLjEyLTMuNTQsNC4yMS00LjExbDM2LjMtLjAyYzEuODksMCwzLjU2LjczLDQuMzUsMi41MmwxLDIuMjd2MjUuMTlaIi8+PHBhdGggY2xhc3M9ImNscy0yIiBkPSJNMzUuMTcsNzQuNjJjLTcuNDQuMjktMTQuNjcuMi0yMS45NiwwLTIuNTItLjA3LTQuOTQtLjIyLTcuNDItLjAzLTIuNzEuMzItNC43LTEuNTUtNS43Ni00LjE3TDAsNDQuOTJjLjY0LTIuMTUsMi4yNi0zLjYsNC40OS00LjE1aDM2LjdjMi41NSwxLDMuODIsMi40LDQuNjYsNC45N3YyNC4xMmMtLjY0LDIuMS0xLjg0LDQuNDEtNC4xNyw0LjVsLTYuNTMuMjZaIi8+PHBhdGggY2xhc3M9ImNscy0xIiBkPSJNOTQuMzksNzQuMThsLTM2LjM3LS4wMmMtMi40MSwwLTMuNzMtMi41My00LjUyLTQuNWwuMDQtMjMuNjNjMC0xLjc4LDIuMTctNC44Nyw0LjItNC44OGwzNi41NS0uMTJjMi4xMy44Miw0Ljc3LDIuMjksNC43OCw0Ljc4bC4wNCwyMy42NmMwLDIuMjYtMi4zOCw0LjctNC43Miw0LjdaIi8+PC9nPjwvc3ZnPg==" alt="" aria-hidden="true" />
+        </button>
+      </div>
     </div>
   </header>
 
@@ -275,6 +331,22 @@
 
   <div class="ticker" aria-hidden="true"><div class="ticker-track" id="track"></div></div>
 
+  <section class="trust">
+    <div class="container">
+      <div class="trust-head rise">
+        <div class="eyebrow">Trusted by teams at</div>
+        <h2>Already the quiet favorite of teams who <span class="accent">move fast</span>.</h2>
+        <p>In early access with operations and delivery teams at companies you'd recognize the shape of, if not the name yet.</p>
+      </div>
+      <div class="trust-stats rise">
+        <div class="tstat"><span class="val">3,400+</span><span class="lab">On the early access list</span></div>
+        <div class="tstat"><span class="val">54</span><span class="lab">Countries represented</span></div>
+        <div class="tstat"><span class="val">92%</span><span class="lab">Of first-wave access claimed</span></div>
+      </div>
+      <div class="logo-marquee" aria-hidden="true"><div class="logo-track" id="logoTrack"></div></div>
+    </div>
+  </section>
+
   <section class="invest">
     <div class="container invest-grid">
       <div>
@@ -290,6 +362,24 @@
         <button class="cta" type="button" id="investBtn">Register investor interest</button>
         <div class="backer-ack" id="investAck">Noted. We'll send the early backer brief to your inbox shortly.</div>
       </div>
+    </div>
+  </section>
+
+  <section class="offices" id="offices">
+    <div class="container">
+      <div class="offices-head rise">
+        <h2>A truly <span class="accent">global</span> footprint.</h2>
+        <p>Seventeen offices across the jurisdictions our General Counsel likes best. Capacity planning, wherever the marginal tax rate is lowest.</p>
+      </div>
+      <div class="map-card">
+        <svg class="worldmap" viewBox="0 0 1000 500" preserveAspectRatio="xMidYMid meet" role="img" aria-label="World map showing PlanWerk office locations concentrated in low-tax jurisdictions">
+          <g id="landDots"></g>
+          <g id="routes"></g>
+          <g id="pins"></g>
+        </svg>
+      </div>
+      <div class="office-grid" id="officeGrid"></div>
+      <p class="fineprint">Office presence reflects favorable regulatory environments. Physical desks not guaranteed at all locations.</p>
     </div>
   </section>
 
@@ -312,6 +402,12 @@
     'Radically allocated','Real-time everything','Cloud-shaped','Zero-standup','Enterprise-grade'];
   const line = words.map(w => '<span>'+w+'</span>').join('');
   document.getElementById('track').innerHTML = line + line;
+
+  /* ---------- Logo marquee (trusted-by) ---------- */
+  const companies = ['Northbeam','Greystone','Fluxpoint','Meridian & Co','Cobalt Systems',
+    'Parallax','Strataworks','Quietroom','Loopware','Basecoat','Vectra','Orbital'];
+  const logoLine = companies.map(c => '<span>'+c+'</span>').join('');
+  document.getElementById('logoTrack').innerHTML = logoLine + logoLine;
 
   /* ---------- Waitlist (gag: no backend) ----------
      TODO: to collect real emails, POST to a Formspree / Mailchimp endpoint here.
@@ -337,6 +433,117 @@
     helper.style.display = 'none';
     success.classList.add('show');
   });
+
+  /* ---------- World map: office network (gag: entirely tax havens) ---------- */
+  (function(){
+    const svgNS = 'http://www.w3.org/2000/svg';
+    const landG = document.getElementById('landDots');
+    const routeG = document.getElementById('routes');
+    const pinG = document.getElementById('pins');
+    const grid = document.getElementById('officeGrid');
+    if(!landG || !grid) return;
+
+    // Rough continent seed points, as [x%, y%] over an equirectangular
+    // crop (lon -180..180, lat 70..-55). Decorative, not survey-grade.
+    const seeds = [
+      [8.3,4.0],[22.2,8.0],[29.2,16.0],[16.7,24.0],[23.6,25.6],[28.6,25.6],[21.7,37.6],[26.4,46.4],[29.7,52.8],
+      [34.7,58.4],[38.1,64.0],[29.2,64.0],[31.9,69.6],[32.2,84.0],[30.3,80.0],[30.6,96.0],[49.4,12.8],[44.7,4.0],[52.8,6.4],
+      [48.9,24.0],[50.6,19.2],[52.8,15.2],[53.3,21.6],[55.6,14.4],[58.9,16.8],[54.4,8.0],[48.3,30.4],[50.8,33.6],[58.3,34.4],
+      [52.2,48.8],[56.4,57.6],[60.6,56.0],[56.9,79.2],[63.1,71.2],[62.5,36.8],[59.7,24.8],[64.7,30.4],[62.5,9.6],[72.2,8.0],
+      [86.1,6.4],[68.9,17.6],[71.7,33.6],[71.4,44.0],[80.6,24.0],[79.2,36.0],[88.3,26.4],[85.3,26.4],[78.1,44.0],[81.4,58.4],
+      [83.9,45.6],[83.9,76.0],[90.8,76.0],[87.5,84.0],[97.8,89.6]
+    ];
+
+    const offices = [
+      {x:27.4,y:40.6,city:"George Town",country:"Cayman Islands",tag:"Global Headquarters. 0% corporate tax, 100% commitment.",hub:true},
+      {x:32.0,y:30.2,city:"Hamilton",country:"Bermuda",tag:"Reinsurance-adjacent, tax-adjacent."},
+      {x:28.5,y:36.0,city:"Nassau",country:"Bahamas",tag:"Sun, sand, and a favorable statutory framework."},
+      {x:32.06,y:41.3,city:"Road Town",country:"British Virgin Islands",tag:"Incorporated here. Located everywhere."},
+      {x:27.9,y:48.8,city:"Panama City",country:"Panama",tag:"A canal and a corporate registry."},
+      {x:29.0,y:24.2,city:"Wilmington",country:"Delaware, USA",tag:"Technically domestic."},
+      {x:48.25,y:13.4,city:"Dublin",country:"Ireland",tag:"Double Irish, minus the sandwich."},
+      {x:51.4,y:14.1,city:"Amsterdam",country:"Netherlands",tag:"A Dutch Sandwich, hold the bread."},
+      {x:51.7,y:16.3,city:"Luxembourg City",country:"Luxembourg",tag:"Population 660,000. Registered entities: more."},
+      {x:52.4,y:18.2,city:"Zug",country:"Switzerland",tag:"Crypto Valley. Low taxes, lower altitude regret."},
+      {x:49.4,y:16.6,city:"St Helier",country:"Jersey",tag:"Not the UK, fiscally speaking."},
+      {x:48.75,y:12.6,city:"Douglas",country:"Isle of Man",tag:"An island of its own, fiscally speaking."},
+      {x:54.03,y:27.3,city:"Valletta",country:"Malta",tag:"EU member. Tax bill: negotiable-adjacent."},
+      {x:52.06,y:21.0,city:"Monaco",country:"Monaco",tag:"No income tax. Excellent yacht parking."},
+      {x:78.8,y:54.9,city:"Singapore",country:"Singapore",tag:"Our Asia-Pacific HQ. Also our other one."},
+      {x:81.7,y:38.2,city:"Hong Kong",country:"Hong Kong SAR",tag:"Territorial taxation, exceptional skyline."},
+      {x:65.97,y:72.2,city:"Port Louis",country:"Mauritius",tag:"Africa desk. India desk. Everyone's desk."}
+    ];
+
+    function toXY(xPct, yPct){ return [xPct*10, yPct*5]; } // viewBox is 1000x500
+
+    function dropLand(x,y,n,spreadX,spreadY){
+      for(let i=0;i<n;i++){
+        const jx = x + (Math.random()-0.5)*spreadX;
+        const jy = y + (Math.random()-0.5)*spreadY;
+        const [cx,cy] = toXY(jx,jy);
+        const c = document.createElementNS(svgNS,'circle');
+        c.setAttribute('cx',cx.toFixed(1));
+        c.setAttribute('cy',cy.toFixed(1));
+        c.setAttribute('r',(1.9+Math.random()*1.4).toFixed(2));
+        c.setAttribute('class','landdot');
+        landG.appendChild(c);
+      }
+    }
+
+    seeds.forEach(function(s){
+      dropLand(s[0], s[1], 6 + Math.floor(Math.random()*6), 4.2, 3);
+    });
+
+    // Fill gaps between nearby seeds within the same landmass so
+    // clusters read as continuous coastline rather than isolated blobs.
+    for(let i=0;i<seeds.length-1;i++){
+      const a = seeds[i], b = seeds[i+1];
+      const dist = Math.hypot(a[0]-b[0], a[1]-b[1]);
+      if(dist < 9){
+        const mx = (a[0]+b[0])/2, my = (a[1]+b[1])/2;
+        dropLand(mx, my, 3 + Math.floor(Math.random()*3), 3, 2.2);
+      }
+    }
+
+    const hub = offices.find(function(o){ return o.hub; });
+    const [hx,hy] = toXY(hub.x,hub.y);
+
+    offices.forEach(function(o){
+      const [ox,oy] = toXY(o.x,o.y);
+
+      if(!o.hub){
+        const midx = (hx+ox)/2;
+        const midy = (hy+oy)/2 - (20 + Math.abs(hx-ox)*0.22);
+        const path = document.createElementNS(svgNS,'path');
+        path.setAttribute('d','M'+hx.toFixed(1)+' '+hy.toFixed(1)+' Q '+midx.toFixed(1)+' '+midy.toFixed(1)+' '+ox.toFixed(1)+' '+oy.toFixed(1));
+        path.setAttribute('class','route');
+        routeG.appendChild(path);
+      }
+
+      const halo = document.createElementNS(svgNS,'circle');
+      halo.setAttribute('cx',ox.toFixed(1));halo.setAttribute('cy',oy.toFixed(1));
+      halo.setAttribute('r','13');halo.setAttribute('class','pin-halo');
+      halo.style.animationDelay = (Math.random()*2).toFixed(2)+'s';
+      pinG.appendChild(halo);
+
+      const dot = document.createElementNS(svgNS,'circle');
+      dot.setAttribute('cx',ox.toFixed(1));dot.setAttribute('cy',oy.toFixed(1));
+      dot.setAttribute('r', o.hub ? '8' : '6');
+      dot.setAttribute('class','pin-dot');
+      const title = document.createElementNS(svgNS,'title');
+      title.textContent = o.city+', '+o.country;
+      dot.appendChild(title);
+      pinG.appendChild(dot);
+
+      const card = document.createElement('div');
+      card.className = 'office-card';
+      card.innerHTML =
+        '<div class="city"><span class="bullet"></span>'+o.city+(o.hub ? ' <span class="hq-tag">HQ</span>' : '')+'</div>'+
+        '<div class="country mono">'+o.country+'</div>'+
+        '<p class="tag">'+o.tag+'</p>';
+      grid.appendChild(card);
+    });
+  })();
 
   /* ---------- Investor interest (gag: no backend) ----------
      TODO: wire to a real form / CRM if you ever take this seriously.

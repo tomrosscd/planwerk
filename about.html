@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>About &mdash; PlanWerk</title>
+<meta name="description" content="PlanWerk is the resource capacity planning platform teams have been waiting for. Here's who we are, why we exist, and what we believe (this week)." />
+<meta property="og:title" content="About PlanWerk" />
+<meta property="og:description" content="The team, the story, and the beliefs behind PlanWerk." />
+<meta property="og:type" content="website" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet" />
+
+<style>
+  :root{
+    --bg:#0A0A0B;
+    --ink:#F5F5F4;
+    --muted:#9A9A94;
+    --faint:#54554F;
+    --mint:#84FEC3;
+    --teal:#5EEAD4;
+    --line:rgba(255,255,255,.08);
+    --line-2:rgba(255,255,255,.14);
+    --maxw:1180px;
+  }
+
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--bg);color:var(--ink);
+    font-family:"Space Grotesk",system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+    -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+    overflow-x:hidden;
+  }
+  a{color:inherit;text-decoration:none;}
+  ::selection{background:var(--mint);color:#08130D;}
+  .mono{font-family:"JetBrains Mono",ui-monospace,monospace;}
+
+  /* ---------- Background ---------- */
+  .bg-layers{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none;}
+  .grid-layer{
+    position:absolute;inset:-2px;
+    background-image:radial-gradient(rgba(255,255,255,.055) 1px, transparent 1px);
+    background-size:34px 34px;background-position:center;
+    -webkit-mask-image:radial-gradient(120% 90% at 50% 30%, #000 30%, transparent 78%);
+    mask-image:radial-gradient(120% 90% at 50% 30%, #000 30%, transparent 78%);
+  }
+  .lines-layer{
+    position:absolute;inset:0;
+    background-image:
+      linear-gradient(to right, rgba(255,255,255,.03) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255,255,255,.03) 1px, transparent 1px);
+    background-size:170px 170px;
+    -webkit-mask-image:radial-gradient(100% 80% at 50% 28%, #000 20%, transparent 72%);
+    mask-image:radial-gradient(100% 80% at 50% 28%, #000 20%, transparent 72%);
+  }
+  .glow{
+    position:absolute;left:50%;top:14%;width:min(900px,124vw);aspect-ratio:1/1;
+    transform:translate(-50%,-50%);border-radius:50%;
+    background:radial-gradient(circle at 50% 50%,
+      rgba(132,254,195,.14) 0%, rgba(94,234,212,.08) 30%,
+      rgba(94,234,212,.03) 46%, transparent 60%);
+    filter:blur(14px);animation:breathe 7.5s ease-in-out infinite;
+  }
+  @keyframes breathe{0%,100%{opacity:.75;transform:translate(-50%,-50%) scale(1);}50%{opacity:1;transform:translate(-50%,-50%) scale(1.06);}}
+
+  /* ---------- Shell ---------- */
+  .wrap{position:relative;z-index:1;}
+  .container{max-width:var(--maxw);margin:0 auto;padding:0 clamp(20px,5vw,44px);}
+
+  /* ---------- Nav ---------- */
+  header.nav{position:relative;z-index:3;}
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;gap:16px;height:70px;}
+  .brand img{height:26px;width:auto;display:block;}
+  .nav-right{display:flex;align-items:center;gap:20px;}
+  .nav-links{display:flex;align-items:center;gap:28px;}
+  .nav-links a{font-family:"JetBrains Mono",monospace;font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;
+    color:var(--muted);transition:color .2s ease;}
+  .nav-links a:hover{color:var(--mint);}
+  .icon-btn{
+    height:38px;width:38px;border-radius:999px;border:1px solid var(--line-2);
+    background:rgba(255,255,255,.02);display:grid;place-items:center;cursor:pointer;
+    transition:border-color .25s ease, transform .25s ease, background .25s ease;
+  }
+  .icon-btn img{height:20px;width:auto;display:block;animation:spin-icon 24s linear infinite;}
+  .icon-btn:hover{border-color:var(--mint);background:rgba(132,254,195,.06);transform:translateY(-1px);}
+  @keyframes spin-icon{to{transform:rotate(360deg);}}
+
+  /* ---------- About hero ---------- */
+  .about-hero{position:relative;z-index:1;padding:clamp(64px,10vw,108px) 0 clamp(48px,7vw,72px);text-align:center;}
+  .about-hero .eyebrow{font-family:"JetBrains Mono",monospace;font-size:12px;letter-spacing:.2em;text-transform:uppercase;
+    color:var(--faint);margin-bottom:20px;}
+  .about-hero h1{font-weight:600;font-size:clamp(32px,5.4vw,58px);line-height:1.06;letter-spacing:-.02em;
+    max-width:18ch;margin:0 auto 22px;}
+  .about-hero h1 .accent{color:var(--mint);}
+  .about-hero p{color:var(--muted);font-size:clamp(15px,1.7vw,18px);line-height:1.6;max-width:56ch;margin:0 auto 32px;}
+  .about-hero .cta-row{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;}
+  .btn-mint{background:var(--mint);color:#08130D;font-family:"Space Grotesk",sans-serif;font-weight:600;font-size:14.5px;
+    border:0;border-radius:999px;padding:13px 26px;cursor:pointer;white-space:nowrap;display:inline-block;
+    transition:transform .18s ease, box-shadow .25s ease;box-shadow:0 8px 26px rgba(132,254,195,.22);}
+  .btn-mint:hover{transform:translateY(-1px);box-shadow:0 12px 34px rgba(132,254,195,.34);}
+  .btn-ghost{border:1px solid var(--line-2);color:var(--ink);font-size:14.5px;border-radius:999px;padding:12px 24px;
+    display:inline-block;transition:border-color .2s ease,background .2s ease;}
+  .btn-ghost:hover{border-color:var(--mint);background:rgba(132,254,195,.06);}
+
+  /* ---------- Origin / at-a-glance ---------- */
+  .origin{position:relative;z-index:1;padding:clamp(56px,8vw,88px) 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .origin-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(32px,5vw,64px);align-items:center;}
+  .origin h2{font-weight:600;font-size:clamp(28px,4vw,44px);line-height:1.08;letter-spacing:-.02em;margin:0 0 20px;max-width:16ch;}
+  .origin h2 .accent{color:var(--mint);}
+  .origin p{color:var(--muted);font-size:clamp(15px,1.6vw,17px);line-height:1.65;max-width:54ch;margin:0 0 18px;}
+  .origin p:last-of-type{margin-bottom:0;}
+
+  .glance-card{border:1px solid var(--line-2);border-radius:20px;background:linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,.01));
+    padding:clamp(22px,3vw,30px);box-shadow:0 30px 70px rgba(0,0,0,.4);}
+  .glance-card .cap{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--faint);margin-bottom:20px;}
+  .glance-row{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:14px 0;border-top:1px solid var(--line);}
+  .glance-row:first-of-type{border-top:0;padding-top:0;}
+  .glance-row .val{font-weight:600;font-size:clamp(17px,2vw,19px);letter-spacing:-.01em;}
+  .glance-row .val.mint{color:var(--mint);}
+  .glance-row .lab{color:var(--muted);font-size:12.5px;text-align:right;max-width:20ch;
+    font-family:"JetBrains Mono",monospace;letter-spacing:.04em;text-transform:uppercase;}
+  @media (max-width:820px){.origin-grid{grid-template-columns:1fr;}}
+
+  /* ---------- Values ---------- */
+  .values{position:relative;z-index:1;padding:clamp(56px,8vw,88px) 0;border-bottom:1px solid var(--line);}
+  .section-head{max-width:620px;margin:0 auto 40px;text-align:center;}
+  .section-head h2{font-weight:600;font-size:clamp(26px,3.6vw,40px);line-height:1.12;letter-spacing:-.02em;margin:0 0 14px;}
+  .section-head h2 .accent{color:var(--mint);}
+  .section-head p{color:var(--muted);font-size:clamp(14px,1.5vw,16px);line-height:1.6;margin:0;}
+
+  .value-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1px;
+    background:var(--line);border:1px solid var(--line);border-radius:16px;overflow:hidden;}
+  .value-card{background:var(--bg);padding:24px 22px;}
+  .value-card .num{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.1em;color:var(--mint);margin-bottom:12px;display:block;}
+  .value-card p{margin:0;font-size:15px;line-height:1.55;color:var(--ink);}
+
+  /* ---------- Team ---------- */
+  .team{position:relative;z-index:1;padding:clamp(56px,8vw,88px) 0;border-bottom:1px solid var(--line);}
+  .team-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:20px;}
+  .team-card{border:1px solid var(--line-2);border-radius:18px;padding:22px 20px;
+    background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.008));}
+  .avatar{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;margin-bottom:16px;
+    background:linear-gradient(135deg,var(--mint),var(--teal));color:#08130D;font-weight:700;font-size:15px;
+    font-family:"Space Grotesk",sans-serif;}
+  .team-card .name{font-weight:600;font-size:15.5px;margin-bottom:3px;}
+  .team-card .role{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase;
+    color:var(--faint);margin-bottom:12px;}
+  .team-card .bio{font-size:13.5px;color:var(--muted);line-height:1.55;margin:0;}
+
+  /* ---------- Stats ---------- */
+  .about-stats{position:relative;z-index:1;padding:clamp(48px,7vw,72px) 0;border-bottom:1px solid var(--line);}
+  .stat-row{display:flex;justify-content:center;gap:clamp(28px,7vw,72px);flex-wrap:wrap;}
+  .astat{text-align:center;}
+  .astat .val{display:block;font-weight:600;font-size:clamp(26px,3.2vw,34px);letter-spacing:-.01em;color:var(--mint);}
+  .astat .lab{display:block;margin-top:5px;font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.06em;
+    text-transform:uppercase;color:var(--muted);}
+
+  /* ---------- CTA ---------- */
+  .about-cta{position:relative;z-index:1;padding:clamp(64px,9vw,100px) 0;text-align:center;}
+  .about-cta h2{font-weight:600;font-size:clamp(26px,3.8vw,42px);line-height:1.1;letter-spacing:-.02em;margin:0 0 16px;}
+  .about-cta h2 .accent{color:var(--mint);}
+  .about-cta p{color:var(--muted);font-size:clamp(14px,1.6vw,16px);margin:0 0 30px;}
+  .about-cta .cta-row{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;}
+
+  /* ---------- Footer ---------- */
+  footer.foot{position:relative;z-index:1;padding:34px 0 40px;}
+  .foot-inner{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;}
+  .foot-inner img{height:20px;width:auto;opacity:.85;}
+  .foot-inner .cr{font-family:"JetBrains Mono",monospace;font-size:11.5px;letter-spacing:.06em;color:var(--faint);}
+
+  /* Entrance */
+  .rise{opacity:0;transform:translateY(16px);animation:rise .7s cubic-bezier(.2,.7,.2,1) forwards;}
+  .d1{animation-delay:.05s;}.d2{animation-delay:.16s;}.d3{animation-delay:.28s;}
+  @keyframes rise{to{opacity:1;transform:translateY(0);}}
+
+  @media (prefers-reduced-motion:reduce){
+    *{animation:none !important;transition:none !important;}
+    .rise{opacity:1;transform:none;}
+  }
+</style>
+</head>
+<body>
+
+<div class="bg-layers" aria-hidden="true">
+  <div class="lines-layer"></div>
+  <div class="grid-layer"></div>
+  <div class="glow"></div>
+</div>
+
+<div class="wrap">
+  <header class="nav">
+    <div class="container nav-inner">
+      <a class="brand" href="index.html" aria-label="PlanWerk"><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz48c3ZnIGlkPSJMYXllcl8yIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1OTUuNDQgMTE1LjI0Ij48ZGVmcz48c3R5bGU+LmNscy0xe2ZpbGw6Izg0ZmVjMzt9LmNscy0ye2ZpbGw6I2ZmZjt9PC9zdHlsZT48L2RlZnM+PGcgaWQ9IkxheWVyXzEtMiI+PHBhdGggY2xhc3M9ImNscy0yIiBkPSJNNTg5LjA3LDQ2LjNsLTQuOTksNS4yNS03LjM2LDcuNjktNC43OCw0Ljk2LDMuNTcsNS4zOSwxMC4wMSwxNC4yMiw0LjYsNi42Myw1LjMxLDcuODctMTYuNDEuMDktMS40NS0xLjY1LTE1LjE4LTIyLjM1LTYuMDcsNS45My0uNDUsMy41NXYxMi4wNWMuNTguNjYuMzUsMi40Mi0uNjIsMi40MmgtMTMuMDRzMC03Ny4yNywwLTc3LjI3YzAtLjQ1LS4zLTEuMjYtLjA0LTEuNDhzLjkyLS4zMywxLjMxLS4zMmwzLjIyLjExLDkuMTUuMS4wNywyMS41M3YzczAsMTEuMTcsMCwxMS4xN2wtLjA3LDYuMThjLjA0LjI0Ljc5LjUzLjk0LjM1bC42Ny0uNzUsMy40MS0zLjY4LDMuNTYtMy44NSw1LjkxLTYuMTgsMy40Mi0zLjY5LDIuODUtMi44MmgxNi41Yy4xMy4wNC42OS4zMS42MS40M2wtLjQzLjY1LTQuMjIsNC40NFoiLz48cGF0aCBjbGFzcz0iY2xzLTIiIGQ9Ik01MTUuOTEsOTcuNDFjMCwuNTEtMSwuOTktMS40Ny45OWwtMTIuNzMtLjE0di01Ny40czEzLjU3LS4wNSwxMy41Ny0uMDVjLjYxLjQyLjUyLDEuNjcuNTEsMi4zN2wtLjA5LDQuMDJjLS4wMi4xOC41MS41Ny42Mi40M2wuNTItLjZjMS4wNS0xLjIxLDEuODUtMi40NiwzLjEtMy40LDIuMzUtMS43Nyw0LjgyLTIuOCw3LjY5LTMuMzMsMi41NS0uNDcsNS4xNC0uNzEsNy41Mi40NWwuMDcsMTEuODFjMCwuNTIuMTQsMS43My0uNTUsMS42NmwtNC44My0uNWMtMi4xNy0uMjItNC4wMS4zMy02LjA5LDEuMDktNC40MywxLjYzLTcuNDMsNS44MS03LjY4LDEwLjY0bC0uMzEsNS44OS4wMiw5LjUxLjE1LDE2LjU1WiIvPjxwYXRoIGNsYXNzPSJjbHMtMiIgZD0iTTQzNyw0MS4yOWwtNi4xLDIwLjA4LTYuMjYsMTguNTItNC41OSwxNC4wMi0xLjU5LDQuNDhoLTEzLjc5cy0xLjc5LTUuMzItMS43OS01LjMybC0xMC4zLTMxLjQ0LTQuMzgsMTIuOTQtNi4yNywxOS40LTEuNjQsNC40MmgtMTMuMjFjLS42MywwLTEuMTQtMS4zLTEuMzItMS44OGwtNy40LTIyLjc1LTkuOTYtMjkuODljLS4yNS0uNzUtLjgzLTEuNzEtLjgyLTIuNSwwLS4zOCwxLjItLjU4LDEuNTMtLjNoMTEuMTVjLjUyLS4xNywxLjMzLS4yNSwxLjc4LS4wOS4zOS4xNC41OC45Mi43NSwxLjUxbDguMTQsMjcuMjYsMi41NSw5Yy4xOS4wOC43MS4yMy43Ni4wNmwuMjEtLjgxLDIuMTYtNy4zNCwzLjE1LTkuODQsNS43Ni0xOC43M2MuMTMtLjQyLjc3LTEuMSwxLjA5LTEuMjhoMTIuMTZjLjg0LjM4LDEsMS4wNywxLjI5LDEuOTlsMTAuODUsMzUuMTkuMzguOTFjLjA4LjE5LjYtLjU4LjY3LS43M2wxMC43OS0zNy4zMiwxMi43My0uMDZjLjM0LDAsMS4wMi4yNiwxLjUxLjUyWiIvPjxwYXRoIGNsYXNzPSJjbHMtMiIgZD0iTTE4NC4zMSw2OS4zMmMtMi42Ny43NC01LjI5Ljc0LTguMDIuNzVsLTIuMDMuMjMtMTQuMjIuMDV2MjYuODdjMCwuMjQtLjIuODktLjQxLjk3LS4yNi4xMS0uNzIuMDktMS4yLjA1bC0xLjkyLjE0LTEwLjk3LS4wMlYxOS41MnM4LjE5LS4xNSw4LjE5LS4xNWwxMS4zNi0uMDQsNy45OC0uMDIsNC4zNS4wMmM3Ljc1LjA0LDE2LjYsMy45MiwyMS4yMSwxMC4zNywzLjM2LDQuNyw0LjQ4LDEwLjQsNC4zOSwxNi4wOGwtLjUxLDQuMjRjLS42OSw1LjcxLTMuNzcsMTAuNC04LjA1LDE0LjIyLTIuODUsMi41NC02LjI2LDQtMTAuMTQsNS4wOFpNMTc1Ljg4LDU3LjMzbDQuNzEtMS4wMmM0LjItMS40MSw2Ljk3LTQuNzUsNy42Mi05LjAxLDEuMjQtOC4xNS0zLjExLTEzLjI4LTExLjA4LTE0Ljc1bC0xNi4xMi0uMDMtMS4xMi41N2MtLjI1LjEzLjEzLjk4LjEyLDEuMjdsLS4wNiw1Ljc4djQuODJzLjA2LDEwLjI1LjA2LDEwLjI1YzAsLjMzLS4zMSwxLjI0LS4wMiwxLjRsMS4yOS43MmgxNC42WiIvPjxwYXRoIGNsYXNzPSJjbHMtMiIgZD0iTTQ4Ny4wNiw4MS42OGw1LjM3Ljg4Yy0xLjUyLDQuOTItNC44NCw4Ljk4LTkuMTMsMTEuOTQtNS4xOCwzLjU3LTExLjMyLDUuMDQtMTcuNjYsNC43OWwtNS4xMy0uNTFjLTEwLjMzLTEuODgtMTcuMzItOC42NC0yMC40OS0xOC41NGwtLjg0LTMuMzNjLS42Mi0yLjQ2LTEuMDQtNC45My0uNzktNy40NmwuNTYtNS42N2MyLjMtMTQuODcsMTMuNTctMjQuMTksMjguNzctMjMuOTIsNy41OS4xNCwxNC40NSwzLjI3LDE5LjQ1LDkuMDQsMy44OSw0LjQ5LDUuODcsMTAuMjksNi40NCwxNi4yNGwuMDgsOS4wNWgtNDAuMzljLjMxLDguNzMsOC41MiwxNC43MywxNi42MywxMi44OSwzLjg5LS44OCw3LjM2LTIuOTIsOS4wOS02LjY4bDMuNjUuNDgsNC40MS44MVpNNDc4LjA1LDYzLjIzYy4zMi0uMDYsMS4wMi0uMywxLjA3LS41Ny4yLTEuMS0xLjY1LTUuNzEtMy44OS03LjU3LTQuMDgtMy40LTkuOTItNC4xMS0xNC44MS0xLjcxLTMuNjgsMS44LTYuMDQsNS40OS02Ljk3LDkuMzhsMy4wNi40N2gyMS41NFoiLz48cGF0aCBjbGFzcz0iY2xzLTIiIGQ9Ik0yMzQuODQsOTEuMDNjLTUuMS03LjYyLTIuOTMtMTkuNjYsNi44My0yNC4yNSw0LjkyLTIuMzIsMTAuMjItMi43NSwxNS41Ni0zLjFsNC40NS0uMjksNi44OC0uNmMuMDctMS4yNi4yNi0zLDAtNC4yMy0uNzctMy42NS0zLjk0LTUuOS03LjUtNi4zOC00LjcxLS42My0xMC4wNy4wOC0xMi4zMiw0LjE2bC0xLjM1LDMuMzItMi44LS4xMmMtMy41NS0uMTYtNi44MS0uNDgtMTAuMzItMS4ybC40Mi0yLjFjMS4xOS01Ljk4LDQuOTMtMTEuMTcsMTAuNTktMTMuNjVsNS43Ny0xLjk4YzMuNTYtMS4yMiwxMS41NS0uOTQsMTUuODQuMTUsMy4wMS43Nyw1Ljk2LDIuMDcsOC40MywzLjk5LDQuNDQsMy40Niw3LjM3LDkuNjUsNy4zOSwxNS4wOGwuMTQsMzguNDgtMTIuMTQuMDljLS4yNSwwLTEtLjExLTEuMDMtLjM1bC0uMTUtMS4xMS0uMjQtMy4yYy4xMS0uNjcuMzktMS4yNC0uNDUtMS43My0yLjc4LDMuNS02LjI3LDUuNjgtMTAuNjEsNi42NS04LjU0LDEuOTItMTguMzMtLjExLTIzLjM3LTcuNjNaTTI1MC4zOCw4Ni45YzYuMjQsMi40NywxNC41LS4wMSwxNy40NS02LjAzLDEuMTktMi40MywxLjE5LTQuODIuOTktNy41NWwtMy43Ni4xNC01LjM1LjU2LTMuODIuMzdjLTMuMjkuMzItNy40NSwxLjY5LTguODcsNC40Ny0xLjYsMy4xMy4wOCw2Ljc0LDMuMzYsOC4wNFoiLz48cGF0aCBjbGFzcz0iY2xzLTIiIGQ9Ik0zMTAuNjksNTUuNzljLTIuMjQsMS45OS0zLjc5LDUuMDktMy44LDguMDlsLS4xMSwzMy44NWMtLjQ3LjM1LTEuMjMuNjgtMS43NS42OGwtMTIuNDMtLjF2LTU2LjNjMC0uMzYuMjgtMS4wOS41NS0xLjExbDEuMTYtLjA1LDExLjMyLS4wOWMuNDksMCwxLjE0LjcxLDEuMTQsMS4xMmwuMDYsNS4zM2MuOTYtLjU2LDEuMDQtLjk1LDEuNjItMS41NSwyLjk4LTMuMTIsNy4yLTUuMywxMS42MS01LjY5bDcuMTIuMDRjMS40NiwwLDMuMjguNjQsNC41OSwxLjIxLDUuNTksMi40Myw5LjksNi44LDExLjU4LDEyLjYzLjM0LDEuMTcuOTIsMi42My45MywzLjc5bC4yMSwyMC44My4wMiwxMi40MS0uMjIsNy41MS0xMy41MS0uMDUtLjE3LTM0LjMzYy0uMDItMy41NS0xLjQtNy4wOC00LjIxLTkuMTMtNC42Ni0zLjQtMTEuMjgtMy4wMS0xNS43MS45MloiLz48cGF0aCBjbGFzcz0iY2xzLTIiIGQ9Ik05My40NiwzNC4yN2wtMzQuODIuMDJjLTIuNy0uMzgtNC4yNC0yLjExLTUuMzctNC42NlY0LjQzYy4wMS0uOTYsMS4wNi0yLjczLDEuODQtMy4xMkw1Ny43Ni4wMWwzNy43Mi4wN2MxLjczLDAsMy44NiwyLjIxLDMuODUsMy44bC0uMDYsMjQuNzJjMCwzLjAxLTMuMDksNC42NC01LjgxLDUuNjdaIi8+PHBhdGggY2xhc3M9ImNscy0yIiBkPSJNNDAuNTUsMzQuMjdsLTM1LjY5LS4wN2MtMS45OCwwLTQuMTctMi4xNi00LjczLTMuOTlWMy4zMUMuMTQuOTgsMy40NywwLDUuMzMsMGwzNi4xOC4wM2MyLjg2LDEuMTEsNC41NywzLjIyLDQuMzcsNi4ydjIyLjYxYy0uNiwyLjkxLTIuMjcsNC43My01LjMzLDUuNDNaIi8+PHBhdGggY2xhc3M9ImNscy0yIiBkPSJNNDUuODgsMTExLjIyYy0uNTYsMS41NC0xLjQ2LDMuOTUtMy4zNCwzLjk1bC0zOS40OS4wN2MtMi4wOS0uNzItMy4yLTIuNTgtMy4wMy00Ljc1di0yNS4xMWMuNjEtMi4wMiwyLjEyLTMuNTQsNC4yMS00LjExbDM2LjMtLjAyYzEuODksMCwzLjU2LjczLDQuMzUsMi41MmwxLDIuMjd2MjUuMTlaIi8+PHBhdGggY2xhc3M9ImNscy0yIiBkPSJNMzUuMTcsNzQuNjJjLTcuNDQuMjktMTQuNjcuMi0yMS45NiwwLTIuNTItLjA3LTQuOTQtLjIyLTcuNDItLjAzLTIuNzEuMzItNC43LTEuNTUtNS43Ni00LjE3TDAsNDQuOTJjLjY0LTIuMTUsMi4yNi0zLjYsNC40OS00LjE1aDM2LjdjMi41NSwxLDMuODIsMi40LDQuNjYsNC45N3YyNC4xMmMtLjY0LDIuMS0xLjg0LDQuNDEtNC4xNyw0LjVsLTYuNTMuMjZaIi8+PHBhdGggY2xhc3M9ImNscy0xIiBkPSJNOTQuMzksNzQuMThsLTM2LjM3LS4wMmMtMi40MSwwLTMuNzMtMi41My00LjUyLTQuNWwuMDQtMjMuNjNjMC0xLjc4LDIuMTctNC44Nyw0LjItNC44OGwzNi41NS0uMTJjMi4xMy44Miw0Ljc3LDIuMjksNC43OCw0Ljc4bC4wNCwyMy42NmMwLDIuMjYtMi4zOCw0LjctNC43Miw0LjdaIi8+PHBhdGggY2xhc3M9ImNscy0yIiBkPSJNMjI0LjI3LDk4LjM2bC0xMy4wMS4wNGMtLjYtLjE0LS45Ni0uNS0uOTMtMS4yM1YxOS41MnMxMy45My0uMDQsMTMuOTMtLjA0djc4Ljg3WiIvPjwvZz48L3N2Zz4=" alt="PlanWerk" /></a>
+      <div class="nav-right">
+        <nav class="nav-links"><a href="index.html">Home</a></nav>
+        <button class="icon-btn" type="button" aria-label="PlanWerk">
+          <img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz48c3ZnIGlkPSJMYXllcl8yIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA5OS4zMyAxMTUuMjQiPjxkZWZzPjxzdHlsZT4uY2xzLTF7ZmlsbDojODRmZWMzO30uY2xzLTJ7ZmlsbDojZmZmO308L3N0eWxlPjwvZGVmcz48ZyBpZD0iTGF5ZXJfMS0yIj48cGF0aCBjbGFzcz0iY2xzLTIiIGQ9Ik05My40NiwzNC4yN2wtMzQuODIuMDJjLTIuNy0uMzgtNC4yNC0yLjExLTUuMzctNC42NlY0LjQzYy4wMS0uOTYsMS4wNi0yLjczLDEuODQtMy4xMkw1Ny43Ni4wMWwzNy43Mi4wN2MxLjczLDAsMy44NiwyLjIxLDMuODUsMy44bC0uMDYsMjQuNzJjMCwzLjAxLTMuMDksNC42NC01LjgxLDUuNjdaIi8+PHBhdGggY2xhc3M9ImNscy0yIiBkPSJNNDAuNTUsMzQuMjdsLTM1LjY5LS4wN2MtMS45OCwwLTQuMTctMi4xNi00LjczLTMuOTlWMy4zMUMuMTQuOTgsMy40NywwLDUuMzMsMGwzNi4xOC4wM2MyLjg2LDEuMTEsNC41NywzLjIyLDQuMzcsNi4ydjIyLjYxYy0uNiwyLjkxLTIuMjcsNC43My01LjMzLDUuNDNaIi8+PHBhdGggY2xhc3M9ImNscy0yIiBkPSJNNDUuODgsMTExLjIyYy0uNTYsMS41NC0xLjQ2LDMuOTUtMy4zNCwzLjk1bC0zOS40OS4wN2MtMi4wOS0uNzItMy4yLTIuNTgtMy4wMy00Ljc1di0yNS4xMWMuNjEtMi4wMiwyLjEyLTMuNTQsNC4yMS00LjExbDM2LjMtLjAyYzEuODksMCwzLjU2LjczLDQuMzUsMi41MmwxLDIuMjd2MjUuMTlaIi8+PHBhdGggY2xhc3M9ImNscy0yIiBkPSJNMzUuMTcsNzQuNjJjLTcuNDQuMjktMTQuNjcuMi0yMS45NiwwLTIuNTItLjA3LTQuOTQtLjIyLTcuNDItLjAzLTIuNzEuMzItNC43LTEuNTUtNS43Ni00LjE3TDAsNDQuOTJjLjY0LTIuMTUsMi4yNi0zLjYsNC40OS00LjE1aDM2LjdjMi41NSwxLDMuODIsMi40LDQuNjYsNC45N3YyNC4xMmMtLjY0LDIuMS0xLjg0LDQuNDEtNC4xNyw0LjVsLTYuNTMuMjZaIi8+PHBhdGggY2xhc3M9ImNscy0xIiBkPSJNOTQuMzksNzQuMThsLTM2LjM3LS4wMmMtMi40MSwwLTMuNzMtMi41My00LjUyLTQuNWwuMDQtMjMuNjNjMC0xLjc4LDIuMTctNC44Nyw0LjItNC44OGwzNi41NS0uMTJjMi4xMy44Miw0Ljc3LDIuMjksNC43OCw0Ljc4bC4wNCwyMy42NmMwLDIuMjYtMi4zOCw0LjctNC43Miw0LjdaIi8+PC9nPjwvc3ZnPg==" alt="" aria-hidden="true" />
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="about-hero">
+      <div class="container">
+        <div class="eyebrow rise d1">About PlanWerk</div>
+        <h1 class="rise d2">We got tired of watching good teams get buried by bad spreadsheets.</h1>
+        <p class="rise d3">So we built the resource capacity platform we wished existed &mdash; back when it was still three browser tabs and a Slack thread called &ldquo;who&rsquo;s actually free this sprint.&rdquo;</p>
+        <div class="cta-row rise d3">
+          <a class="btn-mint" href="index.html#waitlist">Get early access</a>
+          <a class="btn-ghost" href="index.html#top">See the product</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="origin">
+      <div class="container origin-grid">
+        <div>
+          <h2>How we ended up <span class="accent">here</span>.</h2>
+          <p>PlanWerk started the way most tools do: out of spite for the tool we were already using. Three tabs, two consultants, and a shared spreadsheet named <span class="mono">FINAL_v3_capacity_ACTUAL.xlsx</span> that nobody was allowed to touch on a Friday.</p>
+          <p>We spent a year watching great teams get quietly buried &mdash; not by too much work, but by nobody knowing who had room for more of it. So we built the thing that tells you, in one glance, before the retro turns into a confession.</p>
+        </div>
+        <div class="glance-card">
+          <div class="cap">At a glance</div>
+          <div class="glance-row"><span class="val mint">2026</span><span class="lab">Founded</span></div>
+          <div class="glance-row"><span class="val">Cayman Islands</span><span class="lab">Global HQ</span></div>
+          <div class="glance-row"><span class="val">12</span><span class="lab">Team members</span></div>
+          <div class="glance-row"><span class="val">Early access</span><span class="lab">Current status</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="values">
+      <div class="container">
+        <div class="section-head rise">
+          <h2>What we <span class="accent">believe</span> (this week).</h2>
+          <p>Our values are load-bearing, occasionally contradictory, and subject to change at the next offsite.</p>
+        </div>
+        <div class="value-grid">
+          <div class="value-card"><span class="num mono">01</span><p>Radical transparency about who&rsquo;s overbooked.</p></div>
+          <div class="value-card"><span class="num mono">02</span><p>Bias for shipping &mdash; the roadmap, not the features.</p></div>
+          <div class="value-card"><span class="num mono">03</span><p>Customer obsessed. Once we have customers.</p></div>
+          <div class="value-card"><span class="num mono">04</span><p>Default to allocated.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="team">
+      <div class="container">
+        <div class="section-head rise">
+          <h2>The team <span class="accent">(so far)</span>.</h2>
+          <p>Fully distributed. Mostly across jurisdictions with favorable withholding tax treaties.</p>
+        </div>
+        <div class="team-grid">
+          <div class="team-card"><div class="avatar">MV</div><div class="name">Mara Voss</div><div class="role">Co-Founder &amp; CEO</div><p class="bio">Previously scaled three roadmaps to zero.</p></div>
+          <div class="team-card"><div class="avatar">DI</div><div class="name">Devon Ilic</div><div class="role">Co-Founder &amp; CTO</div><p class="bio">Built the allocation engine over one long weekend. Still fixing it.</p></div>
+          <div class="team-card"><div class="avatar">PA</div><div class="name">Priya Anand</div><div class="role">Head of Capacity Research</div><p class="bio">Has a PhD in something adjacent to this.</p></div>
+          <div class="team-card"><div class="avatar">SO</div><div class="name">Sam Okafor</div><div class="role">Growth</div><p class="bio">Wrote the buzzword ticker. Not sorry.</p></div>
+          <div class="team-card"><div class="avatar">EB</div><div class="name">Elin Bergstr&ouml;m</div><div class="role">Design</div><p class="bio">Made the loading spinner spin clockwise, on principle.</p></div>
+          <div class="team-card"><div class="avatar">TM</div><div class="name">Theo Marchetti</div><div class="role">Finance &amp; Ops</div><p class="bio">Knows exactly which office is real.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="about-stats">
+      <div class="container">
+        <div class="stat-row rise">
+          <div class="astat"><span class="val">2026</span><span class="lab">Founded</span></div>
+          <div class="astat"><span class="val">12</span><span class="lab">Team members</span></div>
+          <div class="astat"><span class="val">9</span><span class="lab">Time zones covered</span></div>
+          <div class="astat"><span class="val">17</span><span class="lab">Offices, allegedly</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="about-cta">
+      <div class="container">
+        <h2>Want to help us find out if this <span class="accent">works</span>?</h2>
+        <p>Early access opens in waves. Get in before we figure out pricing.</p>
+        <div class="cta-row">
+          <a class="btn-mint" href="index.html#waitlist">Get early access</a>
+          <a class="btn-ghost" href="index.html#offices">See our offices</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div class="container foot-inner">
+      <img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz48c3ZnIGlkPSJMYXllcl8yIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0NDkuODkgODAuMDQiPjxkZWZzPjxzdHlsZT4uY2xzLTF7ZmlsbDojZmZmO308L3N0eWxlPjwvZGVmcz48ZyBpZD0iTGF5ZXJfMS0yIj48cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik00NDMuNTIsMjcuMDFsLTQuOTksNS4yNS03LjM2LDcuNjktNC43OCw0Ljk2LDMuNTcsNS4zOSwxMC4wMSwxNC4yMiw0LjYsNi42Myw1LjMxLDcuODctMTYuNDEuMDktMS40NS0xLjY1LTE1LjE4LTIyLjM1LTYuMDcsNS45My0uNDUsMy41NXYxMi4wNWMuNTguNjYuMzUsMi40Mi0uNjIsMi40MmgtMTMuMDRzMC03Ny4yNywwLTc3LjI3YzAtLjQ1LS4zLTEuMjYtLjA0LTEuNDhzLjkyLS4zMywxLjMxLS4zMmwzLjIyLjExLDkuMTUuMS4wNywyMS41M3YzczAsMTEuMTcsMCwxMS4xN2wtLjA3LDYuMThjLjA0LjI0Ljc5LjUzLjk0LjM1bC42Ny0uNzUsMy40MS0zLjY4LDMuNTYtMy44NSw1LjkxLTYuMTgsMy40Mi0zLjY5LDIuODUtMi44MmgxNi41Yy4xMy4wNC42OS4zMS42MS40M2wtLjQzLjY1LTQuMjIsNC40NFoiLz48cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik0zNzAuMzYsNzguMTFjMCwuNTEtMSwuOTktMS40Ny45OWwtMTIuNzMtLjE0VjIxLjU2czEzLjU3LS4wNSwxMy41Ny0uMDVjLjYxLjQyLjUyLDEuNjcuNTEsMi4zN2wtLjA5LDQuMDJjLS4wMi4xOC41MS41Ny42Mi40M2wuNTItLjZjMS4wNS0xLjIxLDEuODUtMi40NiwzLjEtMy40LDIuMzUtMS43Nyw0LjgyLTIuOCw3LjY5LTMuMzMsMi41NS0uNDcsNS4xNC0uNzEsNy41Mi40NWwuMDcsMTEuODFjMCwuNTIuMTQsMS43My0uNTUsMS42NmwtNC44My0uNWMtMi4xNy0uMjItNC4wMS4zMy02LjA5LDEuMDktNC40MywxLjYzLTcuNDMsNS44MS03LjY4LDEwLjY0bC0uMzEsNS44OS4wMiw5LjUxLjE1LDE2LjU1WiIvPjxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTI5MS40NiwyMS45OWwtNi4xLDIwLjA4LTYuMjYsMTguNTItNC41OSwxNC4wMi0xLjU5LDQuNDhoLTEzLjc5cy0xLjc5LTUuMzItMS43OS01LjMybC0xMC4zLTMxLjQ0LTQuMzgsMTIuOTQtNi4yNywxOS40LTEuNjQsNC40MmgtMTMuMjFjLS42MywwLTEuMTQtMS4zLTEuMzItMS44OGwtNy40LTIyLjc1LTkuOTYtMjkuODljLS4yNS0uNzUtLjgzLTEuNzEtLjgyLTIuNSwwLS4zOCwxLjItLjU4LDEuNTMtLjNoMTEuMTVjLjUyLS4xNywxLjMzLS4yNSwxLjc4LS4wOS4zOS4xNC41OC45Mi43NSwxLjUxbDguMTQsMjcuMjYsMi41NSw5Yy4xOS4wOC43MS4yMy43Ni4wNmwuMjEtLjgxLDIuMTYtNy4zNCwzLjE1LTkuODQsNS43Ni0xOC43M2MuMTMtLjQyLjc3LTEuMSwxLjA5LTEuMjhoMTIuMTZjLjg0LjM4LDEsMS4wNywxLjI5LDEuOTlsMTAuODUsMzUuMTkuMzguOTFjLjA4LjE5LjYtLjU4LjY3LS43M2wxMC43OS0zNy4zMiwxMi43My0uMDZjLjM0LDAsMS4wMi4yNiwxLjUxLjUyWiIvPjxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTM4Ljc2LDUwLjAyYy0yLjY3Ljc0LTUuMjkuNzQtOC4wMi43NWwtMi4wMy4yMy0xNC4yMi4wNXYyNi44N2MwLC4yNC0uMi44OS0uNDEuOTctLjI2LjExLS43Mi4wOS0xLjIuMDVsLTEuOTIuMTQtMTAuOTctLjAyVi4yM1M4LjE5LjA3LDguMTkuMDdsMTEuMzYtLjA0LDcuOTgtLjAyLDQuMzUuMDJjNy43NS4wNCwxNi42LDMuOTIsMjEuMjEsMTAuMzcsMy4zNiw0LjcsNC40OCwxMC40LDQuMzksMTYuMDhsLS41MSw0LjI0Yy0uNjksNS43MS0zLjc3LDEwLjQtOC4wNSwxNC4yMi0yLjg1LDIuNTQtNi4yNiw0LTEwLjE0LDUuMDhaTTMwLjMzLDM4LjAzbDQuNzEtMS4wMmM0LjItMS40MSw2Ljk3LTQuNzUsNy42Mi05LjAxLDEuMjQtOC4xNS0zLjExLTEzLjI4LTExLjA4LTE0Ljc1bC0xNi4xMi0uMDMtMS4xMi41N2MtLjI1LjEzLjEzLjk4LjEyLDEuMjdsLS4wNiw1Ljc4djQuODJzLjA2LDEwLjI1LjA2LDEwLjI1YzAsLjMzLS4zMSwxLjI0LS4wMiwxLjRsMS4yOS43MmgxNC42WiIvPjxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTM0MS41MSw2Mi4zOGw1LjM3Ljg4Yy0xLjUyLDQuOTItNC44NCw4Ljk4LTkuMTMsMTEuOTQtNS4xOCwzLjU3LTExLjMyLDUuMDQtMTcuNjYsNC43OWwtNS4xMy0uNTFjLTEwLjMzLTEuODgtMTcuMzItOC42NC0yMC40OS0xOC41NGwtLjg0LTMuMzNjLS42Mi0yLjQ2LTEuMDQtNC45My0uNzktNy40NmwuNTYtNS42N2MyLjMtMTQuODcsMTMuNTctMjQuMTksMjguNzctMjMuOTIsNy41OS4xNCwxNC40NSwzLjI3LDE5LjQ1LDkuMDQsMy44OSw0LjQ5LDUuODcsMTAuMjksNi40NCwxNi4yNGwuMDgsOS4wNWgtNDAuMzljLjMxLDguNzMsOC41MiwxNC43MywxNi42MywxMi44OSwzLjg5LS44OCw3LjM2LTIuOTIsOS4wOS02LjY4bDMuNjUuNDgsNC40MS44MVpNMzMyLjUsNDMuOTRjLjMyLS4wNiwxLjAyLS4zLDEuMDctLjU3LjItMS4xLTEuNjUtNS43MS0zLjg5LTcuNTctNC4wOC0zLjQtOS45Mi00LjExLTE0LjgxLTEuNzEtMy42OCwxLjgtNi4wNCw1LjQ5LTYuOTcsOS4zOGwzLjA2LjQ3aDIxLjU0WiIvPjxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTg5LjI5LDcxLjczYy01LjEtNy42Mi0yLjkzLTE5LjY2LDYuODMtMjQuMjUsNC45Mi0yLjMyLDEwLjIyLTIuNzUsMTUuNTYtMy4xbDQuNDUtLjI5LDYuODgtLjZjLjA3LTEuMjYuMjYtMywwLTQuMjMtLjc3LTMuNjUtMy45NC01LjktNy41LTYuMzgtNC43MS0uNjMtMTAuMDcuMDgtMTIuMzIsNC4xNmwtMS4zNSwzLjMyLTIuOC0uMTJjLTMuNTUtLjE2LTYuODEtLjQ4LTEwLjMyLTEuMmwuNDItMi4xYzEuMTktNS45OCw0LjkzLTExLjE3LDEwLjU5LTEzLjY1bDUuNzctMS45OGMzLjU2LTEuMjIsMTEuNTUtLjk0LDE1Ljg0LjE1LDMuMDEuNzcsNS45NiwyLjA3LDguNDMsMy45OSw0LjQ0LDMuNDYsNy4zNyw5LjY1LDcuMzksMTUuMDhsLjE0LDM4LjQ4LTEyLjE0LjA5Yy0uMjUsMC0xLS4xMS0xLjAzLS4zNWwtLjE1LTEuMTEtLjI0LTMuMmMuMTEtLjY3LjM5LTEuMjQtLjQ1LTEuNzMtMi43OCwzLjUtNi4yNyw1LjY4LTEwLjYxLDYuNjUtOC41NCwxLjkyLTE4LjMzLS4xMS0yMy4zNy03LjYzWk0xMDQuODMsNjcuNjFjNi4yNCwyLjQ3LDE0LjUtLjAxLDE3LjQ1LTYuMDMsMS4xOS0yLjQzLDEuMTktNC44Mi45OS03LjU1bC0zLjc2LjE0LTUuMzUuNTYtMy44Mi4zN2MtMy4yOS4zMi03LjQ1LDEuNjktOC44Nyw0LjQ3LTEuNiwzLjEzLjA4LDYuNzQsMy4zNiw4LjA0WiIvPjxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTE2NS4xNCwzNi41Yy0yLjI0LDEuOTktMy43OSw1LjA5LTMuOCw4LjA5bC0uMTEsMzMuODVjLS40Ny4zNS0xLjIzLjY4LTEuNzUuNjhsLTEyLjQzLS4xVjIyLjcxYzAtLjM2LjI4LTEuMDkuNTUtMS4xMWwxLjE2LS4wNSwxMS4zMi0uMDljLjQ5LDAsMS4xNC43MSwxLjE0LDEuMTJsLjA2LDUuMzNjLjk2LS41NiwxLjA0LS45NSwxLjYyLTEuNTUsMi45OC0zLjEyLDcuMi01LjMsMTEuNjEtNS42OWw3LjEyLjA0YzEuNDYsMCwzLjI4LjY0LDQuNTksMS4yMSw1LjU5LDIuNDMsOS45LDYuOCwxMS41OCwxMi42My4zNCwxLjE3LjkyLDIuNjMuOTMsMy43OWwuMjEsMjAuODMuMDIsMTIuNDEtLjIyLDcuNTEtMTMuNTEtLjA1LS4xNy0zNC4zM2MtLjAyLTMuNTUtMS40LTcuMDgtNC4yMS05LjEzLTQuNjYtMy40LTExLjI4LTMuMDEtMTUuNzEuOTJaIi8+PHBhdGggY2xhc3M9ImNscy0xIiBkPSJNNzguNzIsNzkuMDZsLTEzLjAxLjA0Yy0uNi0uMTQtLjk2LS41LS45My0xLjIzVi4yMnMxMy45My0uMDQsMTMuOTMtLjA0djc4Ljg3WiIvPjwvZz48L3N2Zz4=" alt="PlanWerk" />
+      <span class="cr">&copy; 2026 PlanWerk. All rights reserved.</span>
+    </div>
+  </footer>
+</div>
+
+</body>
+</html>
