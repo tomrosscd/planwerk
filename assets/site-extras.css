@@ -21,3 +21,7 @@
 @keyframes visitor-arrival{0%,25%{transform:translateY(110%);}45%,62%{transform:translateY(calc(100% - 70px));}100%{transform:translateY(0);}}
 @media(max-width:600px){.foot-links{width:100%;gap:8px 20px;}.visitor-panel{padding:16px;}.visitor-panel h2{font-size:20px;}.visitor-bubble{font-size:15px;}.visitor-figure{right:16px;}}
 @media(prefers-reduced-motion:reduce){.visitor-dialog *{animation:none!important;transition:none!important;}}
+/* Footer pages remain utilities, rather than primary navigation. */
+.foot-inner{align-items:flex-start;}
+.foot-links{flex:1 1 460px;justify-content:center;gap:8px 20px;}
+@media(max-width:700px){.foot-links{flex-basis:100%;justify-content:flex-start;}}

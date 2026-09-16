@@ -1,0 +1,22 @@
+.open-correspondence{background:#f3f0e8;}
+.open-correspondence .nav,.open-correspondence .foot{background:#0a0a0b;color:#f5f5f4;}
+.open-letter{max-width:800px;margin:0 auto;padding:72px 40px 64px;color:#242c25;font-family:"Source Serif 4",Georgia,serif;}
+.correspondence-heading{padding-bottom:30px;border-bottom:1px solid #24382733;margin-bottom:34px;}
+.correspondence-label{font:10px/1.8 "JetBrains Mono",monospace;letter-spacing:.13em;text-transform:uppercase;color:#59655a;margin:0 0 22px;}
+.open-letter h1{font-size:clamp(32px,4.5vw,48px);line-height:1.14;letter-spacing:-.03em;font-weight:600;margin:0 0 20px;max-width:24ch;}
+.correspondence-subject{font-size:17px;line-height:1.5;color:#59655a;margin:0;}
+.correspondence-body{font-size:18px;line-height:1.8;}
+.correspondence-body p{margin:0 0 23px;orphans:3;widows:3;}
+.correspondence-body strong{font-weight:600;}
+.correspondence-body .salutation{font-weight:600;}
+.correspondence-body .signoff{margin-top:34px;}
+.correspondence-signatures{display:grid;grid-template-columns:1fr 1fr;gap:40px;margin:34px 0 0;}
+.signed-name{font-size:30px;font-style:italic;margin:0 0 9px;}
+.signed-role{font:10px/1.7 "JetBrains Mono",monospace;text-transform:uppercase;color:#59655a;margin:0;}
+.correspondence-end{display:flex;align-items:flex-start;justify-content:space-between;gap:24px;border-top:1px solid #24382733;margin-top:46px;padding-top:22px;}
+.correspondence-end p{font:10px/1.8 "JetBrains Mono",monospace;color:#687168;margin:0;max-width:48ch;}
+.correspondence-print{font:10px/1.6 "JetBrains Mono",monospace;flex:none;border:1px solid #899487;background:transparent;color:#243827;padding:10px 14px;cursor:pointer;}
+.open-letter :focus-visible{outline:2px solid #24573f;outline-offset:5px;}
+@media(max-width:600px){.open-letter{padding:42px 24px;}.correspondence-body{font-size:17px;line-height:1.75;}.correspondence-signatures{gap:28px;}.signed-name{font-size:25px;}.correspondence-end{flex-direction:column;}.correspondence-label{font-size:9px;}}
+@media(max-width:360px){.correspondence-signatures{grid-template-columns:1fr;}}
+@media print{.open-correspondence{background:white;}.open-correspondence .nav,.open-correspondence .foot,.correspondence-print,.visitor-dialog{display:none!important;}.open-letter{max-width:none;padding:0;color:#000;}.correspondence-heading{padding-bottom:16px;margin-bottom:22px;}.open-letter h1{font-size:28pt;}.correspondence-label{margin-bottom:12px;}.correspondence-body{font-size:11pt;line-height:1.5;}.correspondence-body p{margin-bottom:14px;}.correspondence-body .signoff{margin-top:20px;}.correspondence-signatures{break-inside:avoid;margin-top:20px;}.signed-name{font-size:22pt;}.correspondence-end{break-inside:avoid;margin-top:25px;padding-top:14px;}@page{size:A4;margin:18mm;}}
