@@ -1,4 +1,7 @@
+# HTML remains crawlable so search engines can read the noindex directives.
+# Every HTML page declares noindex, nofollow, noarchive and noimageindex.
 User-agent: *
 Allow: /
-
-Sitemap: https://planwerk.life/sitemap.xml
+Disallow: /images/
+Disallow: /assets/
+Disallow: /docs/
