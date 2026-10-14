@@ -1,3 +1,4 @@
+import {distanceForTicks,previewForTicks} from './simulation.js';
 import {chapterAt,billboardAt} from './story.js';
 import {person,round,ellipse} from './sprites.js';
 import {HAZARDS} from './content.js';
@@ -14,7 +15,7 @@ export function drawItem(c,o,x,y,s=1){c.save();c.translate(x,y);c.scale(s,s);c.l
  if(o.theme&&['money','user','investor'].includes(o.type)){const label=o.type==='money'?o.theme.cash:o.type==='user'?o.theme.users:o.theme.investor;text(c,label,0,-43,6,'#f3fff1');}
  c.restore();}
 export function render(canvas,w,character='tom',reduced=false){if(canvas.width!==720){canvas.width=720;canvas.height=1080;}const c=canvas.getContext('2d');c.setTransform(2,0,0,2,0,0);c.imageSmoothingEnabled=true;
- const d=w?w.distanceMm/1000:0,chapter=chapterAt(w?.ticks||0),scene=chapter.scene,cayman=scene==='island'||scene==='panama';const sky=c.createLinearGradient(0,0,0,540);sky.addColorStop(0,chapter.sky);sky.addColorStop(.28,chapter.light);sky.addColorStop(1,chapter.ground);c.fillStyle=sky;c.fillRect(0,0,360,540);
+ const d=w?w.distanceMm/1000:0,chapter=chapterAt(w?.ticks||0,w?.distanceMm||0),scene=chapter.scene,cayman=scene==='island'||scene==='panama';const sky=c.createLinearGradient(0,0,0,540);sky.addColorStop(0,chapter.sky);sky.addColorStop(.28,chapter.light);sky.addColorStop(1,chapter.ground);c.fillStyle=sky;c.fillRect(0,0,360,540);
  ellipse(c,286,37,18,18,'#fff0ba');
  for(let i=0;i<7;i++){const x=i*58-12,h=33+(i*17)%53;round(c,x,143-h,43,h,4,chapter.ground);round(c,x+3,145-h,37,5,2,'#f3ddbf');for(let j=0;j<6;j++)round(c,x+7+(j%3)*11,155-h+Math.floor(j/3)*16,6,8,1,chapter.light);}
  if(scene==='garage'){round(c,7,3,346,144,9,'#655447');for(let i=0;i<8;i++)round(c,12,8+i*16,336,3,1,'#927b62');round(c,18,105,69,33,4,'#d6bc80');text(c,'GARAGE',52,126,9);}
@@ -24,7 +25,7 @@ export function render(canvas,w,character='tom',reduced=false){if(canvas.width!=
  if(cayman){for(const x of [19,322]){c.strokeStyle='#b49665';c.lineWidth=7;c.beginPath();c.moveTo(x,160);c.quadraticCurveTo(x+12,89,x,68);c.stroke();c.strokeStyle='#36896f';c.lineWidth=8;for(let a=-2;a<=2;a++){c.beginPath();c.moveTo(x,69);c.quadraticCurveTo(x+a*16,55,x+a*24,76);c.stroke();}}if(scene==='panama')round(c,0,135,360,9,0,'#5bb9c8');}
  if(scene==='marina'){round(c,0,105,360,42,0,'#5facc8');for(const x of [35,283]){c.fillStyle='#fcf4dc';c.beginPath();c.moveTo(x-27,130);c.lineTo(x+30,130);c.lineTo(x+20,140);c.lineTo(x-20,140);c.fill();round(c,x,79,2,49,0,'#f6f0dc');c.beginPath();c.moveTo(x+3,81);c.lineTo(x+25,125);c.lineTo(x+3,125);c.fill();}}
  if(scene==='studio'||scene==='stage'){round(c,0,0,360,147,0,chapter.sky);for(const x of [9,331])round(c,x,15,20,119,4,scene==='studio'?'#23243d':'#bd4160');for(let i=0;i<9;i++)ellipse(c,15+i*42,138,10,7,chapter.light);}
- const project=(lane,z)=>{const t=Math.max(0,Math.min(1,1-z/190)),p=t*t;return {x:180+(lane-1)*(28+p*82),y:139+p*365,s:.3+p*1.7,p};};
+ const project=(lane,z)=>{const t=Math.max(0,Math.min(1,1-z/previewForTicks(w?.ticks||0))),p=t*t;return {x:180+(lane-1)*(28+p*82),y:139+p*365,s:.3+p*1.7,p};};
  c.fillStyle=chapter.ground;c.beginPath();c.moveTo(124,130);c.lineTo(236,130);c.lineTo(360,540);c.lineTo(0,540);c.fill();const road=c.createLinearGradient(0,130,0,540);road.addColorStop(0,chapter.ground);road.addColorStop(1,chapter.road);c.fillStyle=road;c.beginPath();c.moveTo(137,130);c.lineTo(223,130);c.lineTo(342,540);c.lineTo(18,540);c.fill();
  c.strokeStyle='#e7eed780';c.lineWidth=2;for(const lane of [.5,1.5]){for(let i=0;i<14;i++){const z=(i*9+(reduced?0:90-d%9))%126,a=project(lane,z),b=project(lane,z-3);c.beginPath();c.moveTo(a.x,a.y);c.lineTo(b.x,b.y);c.stroke();}}
  for(let i=0;i<6;i++){const z=(i*18+96-(reduced?0:d%18))%112,p=project(1,z);for(const side of [-1,1]){const x=180+side*(57+p.p*162);c.save();c.translate(x,p.y);c.scale(p.s,p.s);
@@ -37,7 +38,7 @@ export function render(canvas,w,character='tom',reduced=false){if(canvas.width!=
  else if(cayman){round(c,-2,-30,4,30,2,'#b19464');for(const a of [-1,0,1]){c.strokeStyle='#489c79';c.lineWidth=3;c.beginPath();c.moveTo(0,-29);c.quadraticCurveTo(a*8,-38,a*13,-27);c.stroke();}}
  else{round(c,-5,-28,10,28,3,'#b8c8c6');ellipse(c,0,-30,10,6,'#6dac88');}c.restore();}}
  // Full-size travelling ad gantry occupies sky only, never the hazard corridor.
- const billboard=billboardAt(w?.ticks||0),ad=billboard.ad,exit=reduced?0:Math.max(0,(billboard.phase-.94)/.06),bx=20-exit*365;
+ const billboard=billboardAt(w?.ticks||0,distanceForTicks(Math.floor((w?.ticks||0)/360)*360)),ad=billboard.ad,exit=reduced?0:Math.max(0,(billboard.phase-.94)/.06),bx=20-exit*365;
  round(c,bx+6,20,320,88,10,'#133d4050');round(c,bx,14,320,88,10,'#e5ffee');round(c,bx+7,21,306,74,6,'#f5fff7');text(c,ad[0],bx+160,51,ad[0].length>22?16:ad[0].length>17?18:22);text(c,ad[1],bx+160,79,ad[1].length>23?16:ad[1].length>18?18:21,'#278768');
  round(c,30,112,300,19,7,'#153e46');text(c,chapter.title,180,125,10,'#e8fff0');
  if(w)for(const o of [...w.objects].sort((a,b)=>b.z-a.z)){if((o.done&&!o.hit)||o.z<d-3)continue;const p=project(o.lane,o.z-d);drawItem(c,{...o,theme:chapter},p.x,p.y,p.s);}
