@@ -1,5 +1,5 @@
 import {SPEED_CURVE} from './story.js';
-export const VERSION = 'runwerk-v6';
+export const VERSION = 'runwerk-v7';
 export const STEP = 1 / 60;
 export const CHUNKS = [ [0,1,0,-1], [1,0,-1,0], [-1,0,1,0], [0,0,1,-1], [1,-1,1,0], [-1,1,-1,0], [0,1,-1,0], [0,-1,1,0], [1,0,0,-1], [-1,0,0,1] ];
 export const SKINS = ['workshop','launch','scope','payroll','diligence','meeting'];
@@ -9,22 +9,24 @@ export function random(seed) { let n=seed>>>0; return () => { n += 0x6D2B79F5; l
 function baseDistance(n) {
  let mm=0;
  for(let i=0;i<SPEED_CURVE.length;i++){const current=SPEED_CURVE[i],start=current.at*60;if(n<=start)break;const next=SPEED_CURVE[i+1],span=next?(next.at-current.at)*60:Infinity,count=Math.min(n-start,span);mm+=current.speed*1000/60*count;if(next)mm+=(next.speed-current.speed)*1000/60*count*(count-1)/(2*span);}
- return Math.floor(mm);
+ return Math.floor(mm*1.25);
 }
-export const MAX_SPEED=132;
-const LOG_RATE=.022/60;
+// Exponential phase transitions into sustained acceleration, without a speed ceiling.
+export const EXPONENTIAL_TARGET_SPEED=180;
+const TAIL_ACCELERATION=.3;
+const LOG_RATE=.04/60;
 let lower=0,upper=432000;while(lower<upper){const mid=Math.floor((lower+upper)/2);if(baseDistance(mid)<8000000)lower=mid+1;else upper=mid;}
 export const RAMP_START_TICK=lower;
 const rampDistance=baseDistance(RAMP_START_TICK),rampSpeed=(baseDistance(RAMP_START_TICK+1)-rampDistance)*60/1000;
-const rampCount=Math.ceil(Math.log(MAX_SPEED/rampSpeed)/LOG_RATE);
-export function distanceForTicks(n){if(n<=RAMP_START_TICK)return baseDistance(n);const count=Math.min(n-RAMP_START_TICK,rampCount),tail=Math.max(0,n-RAMP_START_TICK-rampCount);return Math.floor(rampDistance+rampSpeed*1000/60*Math.expm1(LOG_RATE*count)/Math.expm1(LOG_RATE)+tail*MAX_SPEED*1000/60);}
-export function speedForTicks(n){return n<RAMP_START_TICK?(baseDistance(n+1)-baseDistance(n))*60/1000:Math.min(MAX_SPEED,rampSpeed*Math.exp(LOG_RATE*(n-RAMP_START_TICK)));}
-function speedAtDistance(m){return m<rampDistance/1000?66:Math.min(MAX_SPEED,rampSpeed+(m-rampDistance/1000)*60*Math.expm1(LOG_RATE));}
-export function previewForTicks(n){return Math.max(190,speedForTicks(n)*2.7);}
+const rampCount=Math.ceil(Math.log(EXPONENTIAL_TARGET_SPEED/rampSpeed)/LOG_RATE);
+export function distanceForTicks(n){if(n<=RAMP_START_TICK)return baseDistance(n);const count=Math.min(n-RAMP_START_TICK,rampCount),tail=Math.max(0,n-RAMP_START_TICK-rampCount);return Math.floor(rampDistance+rampSpeed*1000/60*Math.expm1(LOG_RATE*count)/Math.expm1(LOG_RATE)+(tail*EXPONENTIAL_TARGET_SPEED+TAIL_ACCELERATION/60*tail*(tail-1)/2)*1000/60);}
+export function speedForTicks(n){return n<RAMP_START_TICK?(baseDistance(n+1)-baseDistance(n))*60/1000:n-RAMP_START_TICK<rampCount?rampSpeed*Math.exp(LOG_RATE*(n-RAMP_START_TICK)):EXPONENTIAL_TARGET_SPEED+TAIL_ACCELERATION*(n-RAMP_START_TICK-rampCount)/60;}
+function speedAtDistance(m){const capDistance=distanceForTicks(RAMP_START_TICK+rampCount)/1000;return m<rampDistance/1000?82.5:m<capDistance?Math.min(EXPONENTIAL_TARGET_SPEED,rampSpeed+(m-rampDistance/1000)*60*Math.expm1(LOG_RATE)):Math.sqrt(EXPONENTIAL_TARGET_SPEED**2+2*TAIL_ACCELERATION*(m-capDistance));}
+export function previewForTicks(n){return Math.max(190,speedForTicks(n)*2.1);}
 export function pickupBound(n) { const d=distanceForTicks(n)/1000; return Math.max(0,Math.floor((d-130)/38)+1); }
 export function pattern(seed,count=100) {
  const rng=random(seed), rows=[];let safe=1,index=0,z=140;
- while(rows.length<count) { const chunk=CHUNKS[Math.floor(rng()*CHUNKS.length)]; for(let delta of chunk){if(rows.length>=count)break;if(index>=20&&delta===0)delta=rng()<.5?-1:1;if(z>=8000){safe=safe===1?(rng()<.5?0:2):1;}else safe=Math.max(0,Math.min(2,safe+delta)); const hazards=[]; for(let lane=0;lane<3;lane++){if(lane===safe)continue; if(index<6 && hazards.length)continue; if(index>=6 && rng()<Math.max(0,.25-index*.008))continue;const skin=SKINS[Math.floor(rng()*6)];hazards.push({lane,skin,type:TYPES[skin]});} rows.push({index,z,safe,hazards,pickupLane:safe,investor:index%(z>=8000?48:index<35?16:index<80?24:32)===3,user:index%3===1,ledger:index>10&&index%7===4,finalfile: index%9===6});z+=z>=8000?Math.max(65,speedAtDistance(z+130)*.92):Math.min(65,38+index*.3);index++;} }
+ while(rows.length<count) { const chunk=CHUNKS[Math.floor(rng()*CHUNKS.length)]; for(let delta of chunk){if(rows.length>=count)break;if(index>=10&&delta===0)delta=rng()<.5?-1:1;if(z>=1800){safe=safe===1?(rng()<.5?0:2):1;}else safe=Math.max(0,Math.min(2,safe+delta)); const hazards=[]; for(let lane=0;lane<3;lane++){if(lane===safe)continue; if(index<4 && hazards.length)continue; if(index>=4 && rng()<Math.max(0,.16-index*.012))continue;const skin=SKINS[Math.floor(rng()*6)];hazards.push({lane,skin,type:TYPES[skin]});} rows.push({index,z,safe,hazards,pickupLane:safe,investor:index%(z>=8000?64:index<35?20:index<80?32:48)===3,user:index%3===1,ledger:index>10&&index%7===4,finalfile: index%9===6});z+=z>=8000?Math.max(65,speedAtDistance(z+180)*Math.max(.42,.7-(z-8000)/80000)):Math.min(48,38+index*.12);index++;} }
  return rows;
 }
 export function createWorld(seed=1,character='tom') {return {seed,character,ticks:0,distanceMm:0,lane:1,x:1,from:1,target:1,moveTicks:0,buffer:0,action:null,actionTicks:0,pickups:0,cash:0,users:0,investors:0,shield:false,grace:0,dead:false,last:null,objects:[],nextRow:0,rows:pattern(seed,64),jumps:0,shieldHits:0,avoided:0,feedback:[],events:[]};}
