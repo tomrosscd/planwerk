@@ -80,6 +80,9 @@
 .nr-quote{margin:40px 0;padding:6px 0 6px 28px;border-left:2px solid var(--mint)}
 .nr-quote p{font-size:clamp(20px,2.4vw,25px)!important;line-height:1.45!important;font-weight:500;letter-spacing:-.015em;color:var(--ink)!important;margin:0 0 14px!important}
 .nr-quote cite{font:11px/1.6 "JetBrains Mono",monospace;font-style:normal;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.nr-evidence{margin:36px 0 40px}
+.nr-evidence img{display:block;width:100%;height:auto;border:1px solid var(--line);border-radius:8px;background:#fff}
+.nr-evidence figcaption{margin-top:10px;font:11px/1.6 "JetBrains Mono",monospace;color:var(--muted)}
 .nr-cta{margin-top:36px!important}
 .nr-body .nr-cta a{color:#08130D;border:1px solid transparent}
 .nr-box{border:1px solid #84fec344;background:#84fec307;border-radius:18px;padding:26px 28px;margin:48px 0 40px}
